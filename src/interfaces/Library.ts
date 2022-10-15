@@ -1,4 +1,4 @@
-export interface Library {
+export default interface Library {
     id: string
     name: string,
     games: Array<string>,

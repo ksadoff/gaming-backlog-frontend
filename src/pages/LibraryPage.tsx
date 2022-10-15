@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FilterMenu from "../components/FilterMenu";
-import { Library } from "../interfaces/Library";
-import { Game } from "../interfaces/Game";
+import Library from "../interfaces/Library";
+import Game from "../interfaces/Game";
 
 export default function LibraryPage() {
     const [userLibraries, setUserLibraries] = useState<Array<Library>>([]);

@@ -1,4 +1,4 @@
-export interface Game {
+export default interface Game {
     name: string 
     platforms: Array<string>
     genres: Array<string>
