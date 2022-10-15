@@ -1,4 +1,4 @@
-type Game = {
+export interface Game {
     name: string 
     platforms: Array<string>
     genres: Array<string>
@@ -8,5 +8,3 @@ type Game = {
     summary: string,
     image: string
 }
-
-export default Game;
