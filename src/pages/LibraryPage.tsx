@@ -11,11 +11,12 @@ export default function LibraryPage() {
     useEffect(() => {
         //TODO: Call API to fetch user libraries on page load
         // set currentLibrary to Played Games
+        
+        setCurrentGames(currentLibrary?.games || []);
     }, [])
 
     useEffect(() => {
-        //TODO Call API to fetch Game objects from current library
-        // set currentGames
+        setCurrentGames(currentLibrary?.games || []);
     }, [currentLibrary]);
 
     return(
