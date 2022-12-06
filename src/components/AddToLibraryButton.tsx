@@ -1,5 +1,4 @@
 import React from "react"
-import '/src/styles/game-display.css'
 
 interface ButtonInfo {
     text: string,
