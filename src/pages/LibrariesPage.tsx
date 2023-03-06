@@ -19,9 +19,9 @@ export default function LibrariesPage() {
     
     return(
         <OpenLibraryModalButton text="+" onClick={() => setIsLibraryModalOpen(true)}/>
-        //TODO: GB-58 Add modal
+        //TODO: GB-56 Add modal
     )
-    // TODO: Render all libraries per designs
+    // TODO: GB-57 Render all libraries per designs
     // We'll display the first 5 games added to each library
     // On click we'll redirect to the library (by id)
 }

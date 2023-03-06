@@ -23,7 +23,7 @@ export function GameCard({gameTitle, gameImage, gameDescription } : GameCardProp
             <div>
                 <OpenLibraryModalButton text="Add to Library" onClick={addToLibrary}></OpenLibraryModalButton>
             </div>
-            {/* TODO: GB-58 Add modal here */}
+            {/* TODO: GB-56 Add modal here */}
 
         </div>
     )
