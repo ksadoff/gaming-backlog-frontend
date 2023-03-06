@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from "react";
-import AddToLibraryButton from './AddToLibraryButton';
+import OpenLibraryModalButton from './OpenLibraryModalButton';
 
 /**
  * An alternative approach to selecting a library
@@ -32,7 +32,7 @@ const AddToLibrarySelect = () => {
         </select>
         <br></br>
         <br></br>
-        <AddToLibraryButton text="Add to Library" onClick={handleSubmit}/>
+        <OpenLibraryModalButton text="Add to Library" onClick={handleSubmit}/>
         </div>
     )
 }

@@ -2,17 +2,25 @@ import React, { useEffect, useState } from "react";
 import FilterMenu from "../components/FilterMenu";
 import Library from "../interfaces/Library";
 import Game from "../interfaces/Game";
+import * as libraryApi from "../api/libraryApi";
 
-export default function LibraryPage() {
+
+/*The page representing a specific library (e.g. Completed Games) */
+// TODO: How will we fetch libraryId? Query params? Context?
+export default function LibraryPage(libraryId: string) {
     const [userLibraries, setUserLibraries] = useState<Array<Library>>([]);
     const [currentLibrary, setCurrentLibrary] = useState<Library>();
     const [currentGames, setCurrentGames] = useState<Array<Game>>([]);
 
     useEffect(() => {
-        //TODO: Call API to fetch user libraries on page load
         // set currentLibrary to Played Games
-        
-        setCurrentGames(currentLibrary?.games || []);
+        const fetchLibraries = async () => {
+            const currentLibrary : Library = await libraryApi.getLibrary(libraryId);
+            setCurrentLibrary(currentLibrary);
+            setCurrentGames(currentLibrary?.games || []);
+        }
+
+        fetchLibraries();
     }, [])
 
     useEffect(() => {
