@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import Game from './interfaces/Game'
+import LibrariesPage from './pages/LibrariesPage';
 
 const App = () => {
   let emptyGame: Game = { name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", image: ""}
@@ -19,11 +21,15 @@ const App = () => {
       return vals
     }
 
-
-
     return (
-      <div>
-        {JSON.stringify(data) === JSON.stringify(emptyGame) ?
+        <BrowserRouter>
+          <Routes>
+            <Route path="/libraries" element={<LibrariesPage/>}></Route>
+          </Routes>
+       </BrowserRouter>)
+
+      //  Leaving for now since we'll add real routing and do more with this file in GB-36
+        {/* {JSON.stringify(data) === JSON.stringify(emptyGame) ?
         <h1>"Loading..." </h1> :
         <div>
         <h1 className="game-title">{data.name}</h1>
@@ -37,8 +43,7 @@ const App = () => {
         <p><div className="game-field-header">Summary: </div> {data.summary}</p>
         </div>
         }
-      </div>
-  )
+      </div> */}
 }
 
 export default App;
