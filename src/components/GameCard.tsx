@@ -1,7 +1,8 @@
 import React from "react";
 
 // components
-import AddToLibraryButton from "./AddToLibraryButton";
+import OpenLibraryModalButton from "./OpenLibraryModalButton";
+
 // TODO: create game page to use this card
 // for right now assume all info comes from game API
 interface GameCardProps {
@@ -20,8 +21,10 @@ export function GameCard({gameTitle, gameImage, gameDescription } : GameCardProp
             <svg>{gameImage}</svg>
             <p>{gameDescription}</p>
             <div>
-                <AddToLibraryButton text="Add to Library" onClick={addToLibrary}></AddToLibraryButton>
+                <OpenLibraryModalButton text="Add to Library" onClick={addToLibrary}></OpenLibraryModalButton>
             </div>
+            {/* TODO: GB-56 Add modal here */}
+
         </div>
     )
 }

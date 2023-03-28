@@ -5,7 +5,7 @@ interface ButtonInfo {
     onClick: () => void
 }
 
-const AddToLibrary = (props: ButtonInfo) => {
+const OpenLibraryModalButton = (props: ButtonInfo) => {
     return (
     <button
         className= "add-to-library-button"
@@ -16,4 +16,4 @@ const AddToLibrary = (props: ButtonInfo) => {
 )
 }
 
-export default AddToLibrary;
+export default OpenLibraryModalButton;
