@@ -4,7 +4,7 @@ import Game from './interfaces/Game'
 import LibrariesPage from './pages/LibrariesPage';
 
 const App = () => {
-  let emptyGame: Game = { name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", image: ""}
+  let emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", image: ""}
   const [data, setData] = useState(emptyGame);
 
     useEffect( () => {

@@ -2,9 +2,8 @@ import { homeUrl, librariesBaseUrl } from "../constants/ApiConstants";
 import Library from "../interfaces/Library";
 import LibraryPreview from "../interfaces/LibraryPreview";
 
-// TODO: will we eventually want this to be get all libraries for a single user? Will have to update backend endpoints
-export function getAllLibraries(): Promise<Library[]> {
-    return fetch(homeUrl + librariesBaseUrl, {
+export function getAllLibrariesWithGames(): Promise<Library[]> {
+    return fetch(homeUrl + librariesBaseUrl + "withGames/", {
         method: "GET",
     })
     .then((response) => {
