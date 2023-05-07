@@ -8,12 +8,12 @@ import GamePreview from "../interfaces/GamePreview";
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
     const [userLibraries, setUserLibraries] = useState<Array<LibraryPreview>>([]);
-    // const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
+    const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
 
     const gamesToPreviews = (games: Array<Game>) => {
         const gamePreviews = new Array<GamePreview>;
         games.forEach(game => gamePreviews.push({ id: game.id, name: game.name}));
-        return gamePreviews
+        return gamePreviews;
     }
 
     useEffect(() => {
