@@ -1,4 +1,5 @@
 export default interface Game {
+    id: string;
     name: string 
     platforms: Array<string>
     genres: Array<string>
