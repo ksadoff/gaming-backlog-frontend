@@ -6,10 +6,7 @@ export function getAllLibrariesWithGames(): Promise<Library[]> {
     return fetch(homeUrl + librariesBaseUrl + "withGames/", {
         method: "GET",
     })
-    .then((response) => {
-        console.log(response);
-        return response.json()
-    })
+    .then((response) => response.json())
     .catch(err => console.log(err));
 }
 
