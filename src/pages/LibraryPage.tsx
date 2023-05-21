@@ -32,12 +32,13 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
 
     return(
         <div>
-            <h1>My Library</h1>
+            <h1>{currentLibrary?.name}</h1>
                 <FilterMenu/>
                 <div>
                     {(currentGames.map((game) => {
                         // TODO: Add routing to link to game page
-                        return <img src={game.image}/>;
+                       
+                        return  <p>{game.name}</p>;
                      })
                     )}
             </div>

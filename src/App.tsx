@@ -26,6 +26,8 @@ const App = () => {
     return (
         <BrowserRouter>
           <Routes>
+            {/* For now, home page can be the libraries page */}
+            <Route path="/" element={<LibrariesPage/>}></Route>
             <Route path="/libraries" element={<LibrariesPage/>}></Route>
             <Route path="/libraries/:id" element={<LibraryPageWrapper/>}></Route>
             {/* TODO: Eventually we will need to differentiate between game page and 
