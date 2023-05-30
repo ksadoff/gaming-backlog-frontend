@@ -18,6 +18,14 @@ export function getLibrary(id: string): Promise<Library> {
     .catch(err => console.log(err));
 }
 
+export function getLibraryWithGames(id: string): Promise<LibraryPreview> {
+    return fetch(homeUrl + librariesBaseUrl + `${id}/withGames`, {
+        method: "GET",
+    })
+    .then((response) => response.json())
+    .catch(err => console.log(err));
+}
+
 export function createLibrary(library: Library): Promise<Library> {
     return fetch(homeUrl + librariesBaseUrl, {
         method: "POST",
