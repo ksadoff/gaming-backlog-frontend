@@ -9,7 +9,6 @@ interface LibraryPageProps {
 }
 
 /*The page representing a specific library (e.g. Completed Games) */
-// TODO: How will we fetch libraryId? Query params? Context?
 export default function LibraryPage({ libraryId }: LibraryPageProps) {
     const [userLibraries, setUserLibraries] = useState<Array<Library>>([]);
     const [currentLibrary, setCurrentLibrary] = useState<Library>();
