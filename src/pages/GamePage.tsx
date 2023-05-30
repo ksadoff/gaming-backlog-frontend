@@ -1,7 +1,11 @@
 import { GameCard } from "../components/GameCard";
 import React from "react";
 
-export function GamePage() {
+interface GamePageProps {
+    id: string;
+}
+
+export default function GamePage({ id }: GamePageProps) {
 
     const getTitle = () => {
         //TODO: fetch title from API

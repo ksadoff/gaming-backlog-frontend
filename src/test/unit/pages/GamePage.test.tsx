@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { GamePage } from '../../../pages/GamePage';
+import GamePage from '../../../pages/GamePage';
 
 describe('Rendering GamePage', () => {
   beforeEach(() => {
-    render(<GamePage />);
+    render(<GamePage id="123" />);
   });
 
   it('renders game title', () => {

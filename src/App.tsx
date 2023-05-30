@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, BrowserRouter, Routes, useParams } from 'react-router-dom';
 import Game from './interfaces/Game'
 import LibrariesPage from './pages/LibrariesPage';
+import LibraryPage from './pages/LibraryPage';
+import GamePage from './pages/GamePage';
 
 const App = () => {
   let emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", image: ""}
@@ -24,26 +26,35 @@ const App = () => {
     return (
         <BrowserRouter>
           <Routes>
+            {/* For now, home page can be the libraries page */}
+            <Route path="/" element={<LibrariesPage/>}></Route>
             <Route path="/libraries" element={<LibrariesPage/>}></Route>
+            <Route path="/libraries/:id" element={<LibraryPageWrapper/>}></Route>
+            {/* TODO: Eventually we will need to differentiate between game page and 
+            custome game page */}
+            <Route path="/games/:id" element={<GamePageWrapper/>}></Route>
           </Routes>
        </BrowserRouter>)
+}
 
-      //  Leaving for now since we'll add real routing and do more with this file in GB-36
-        {/* {JSON.stringify(data) === JSON.stringify(emptyGame) ?
-        <h1>"Loading..." </h1> :
-        <div>
-        <h1 className="game-title">{data.name}</h1>
-        <img src={data.image} alt={data.name} width="150px" height="150px"/>
-        <p><div className="game-field-header">Platforms: </div> {joinStrings(data.platforms)}</p>
-        <p><div className="game-field-header">Franchises: </div> {joinStrings(data.franchises)}</p>
-        <p><div className="game-field-header">Genres: </div> {joinStrings(data.genres)}</p>
-        <p><div className="game-field-header">Companies: </div>{joinStrings(data.companies)}</p>
-        <p><div className="game-field-header">Release: </div> {joinStrings(data.releaseDate)}</p>
-        <br></br>
-        <p><div className="game-field-header">Summary: </div> {data.summary}</p>
-        </div>
-        }
-      </div> */}
+function LibraryPageWrapper() {
+  const { id } = useParams();
+  if (id) { 
+    return <LibraryPage libraryId={id} />;
+  } else {
+     //return user to their default libraries page
+     return <LibrariesPage />;
+  }
+}
+
+function GamePageWrapper() {
+  const { id } = useParams();
+  if (id) { 
+    return <GamePage id={id} />;
+  } else {
+     //return user to their default libraries page
+     return <LibrariesPage />;
+  }
 }
 
 export default App;
