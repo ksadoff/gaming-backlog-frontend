@@ -55,7 +55,6 @@ export default function LibrariesPage() {
             </h1>
             <div>
                 {(userLibraries.map((preview) => {
-                    // TODO: Add routing to link to game page
                     return <div>
                         <h1 style={{zIndex: 10}}>
                             <a href={`${homeUiUrl}`+"libraries/"+preview.id}>{preview.name}</a>

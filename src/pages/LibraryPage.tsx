@@ -35,7 +35,6 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
                 <div>
                     {(currentGames.map((game) => {
                         // TODO: Add routing to link to game page
-                       
                         return  <p>{game.name}</p>;
                      })
                     )}
