@@ -27,7 +27,6 @@ export default function GamePage({gameId}: GameId) {
     }
 
     function getImage() {
-        console.log(`Current Image: ${currentGame.images}`)
         return currentGame?.images || [];
     }
 
