@@ -6,6 +6,7 @@ import * as gameApi from '../../../api/gameApi';
 
 describe('Rendering GamePage', () => {
   let mockGame: Game = {
+    id: "18327",
     name: "The Legend of Zelda: Tears of the Kingdom", 
     platforms: ["Nintendo Switch"],
     genres: ["Action-Adventure", "Adventure"],

@@ -30,12 +30,12 @@ export default function GameInstancePage({gameId}: GameId) {
         return currentGame?.name || ""
     }
 
-    function getImage() {
+    const getImage = () => {
         console.log(`Current Image: ${currentGame.images}`)
         return currentGame?.images || [];
     }
 
-    function getDescription() {
+    const getDescription = () => {
         return currentGame?.summary || "";
     }
 

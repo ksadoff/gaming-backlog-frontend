@@ -4,14 +4,13 @@ import Library from "../interfaces/Library";
 import Game from "../interfaces/Game";
 import * as libraryApi from "../api/libraryApi";
 
-interface LibraryId {
-    libraryId: string
+interface LibraryPageProps {
+    libraryId: string;
 }
-
 
 /*The page representing a specific library (e.g. Completed Games) */
 // TODO: How will we fetch libraryId? Query params? Context?
-export default function LibraryPage({libraryId}: LibraryId) {
+export default function LibraryPage({ libraryId }: LibraryPageProps) {
     const [userLibraries, setUserLibraries] = useState<Array<Library>>([]);
     const [currentLibrary, setCurrentLibrary] = useState<Library>();
     const [currentGames, setCurrentGames] = useState<Array<Game>>([]);
@@ -33,12 +32,12 @@ export default function LibraryPage({libraryId}: LibraryId) {
 
     return(
         <div>
-            <h1>My Library</h1>
+            <h1>{currentLibrary?.name}</h1>
                 <FilterMenu/>
                 <div>
                     {(currentGames.map((game) => {
                         // TODO: Add routing to link to game page
-                        return <img src={game.images[0]}/>;
+                        return  <p>{game.name}</p>;
                      })
                     )}
             </div>

@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import Game from "../interfaces/Game";
 import * as gameApi from "../api/gameApi";
 
-interface GameId {
-    gameId: string
+interface GamePageProps {
+    gameId: string;
 }
 
-export default function GamePage({gameId}: GameId) {
-    let emptyGame: Game = { name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
+export default function GamePage({ gameId }: GamePageProps) {
+    let emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
     const [currentGame, setCurrentGame] = useState<Game>(emptyGame);
-    console.log(currentGame)
 
     useEffect(() => {
         // set currentGame
@@ -26,11 +25,11 @@ export default function GamePage({gameId}: GameId) {
         return currentGame?.name || ""
     }
 
-    function getImage() {
+    const getImage = ()  => {
         return currentGame?.images || [];
     }
 
-    function getDescription() {
+    const getDescription = () => {
         return currentGame?.summary || "";
     }
 
@@ -58,7 +57,7 @@ export default function GamePage({gameId}: GameId) {
     // We'll want a page header at some point
     <GameCard 
         gameTitle = {getTitle()} 
-        gameImage={getImage()} 
+        gameImage={getImage()}
         gameDescription={getDescription()}
         gamePlatforms = {getPlatforms()}
         gameGenres = {getGenres()}
