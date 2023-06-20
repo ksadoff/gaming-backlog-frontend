@@ -33,6 +33,7 @@ it('renders data', async () => {
     await waitFor(() => {
     const title = screen.getByText(/Want to Play/i)
     expect(title).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: "Want to Play"})).toBeInTheDocument();
     });
     const game = screen.getByText(/Disco Elysium/i);
     expect(game).toBeInTheDocument();

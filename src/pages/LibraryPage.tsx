@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FilterMenu from "../components/FilterMenu";
-import Library from "../interfaces/Library";
-import Game from "../interfaces/Game";
+import LibraryPreview from "../interfaces/LibraryPreview";
+import GamePreview from "../interfaces/GamePreview";
 import * as libraryApi from "../api/libraryApi";
 
 interface LibraryPageProps {
@@ -9,16 +9,14 @@ interface LibraryPageProps {
 }
 
 /*The page representing a specific library (e.g. Completed Games) */
-// TODO: How will we fetch libraryId? Query params? Context?
 export default function LibraryPage({ libraryId }: LibraryPageProps) {
-    const [userLibraries, setUserLibraries] = useState<Array<Library>>([]);
-    const [currentLibrary, setCurrentLibrary] = useState<Library>();
-    const [currentGames, setCurrentGames] = useState<Array<Game>>([]);
+    const [currentLibrary, setCurrentLibrary] = useState<LibraryPreview>();
+    const [currentGames, setCurrentGames] = useState<Array<GamePreview>>([]);
 
     useEffect(() => {
         // set currentLibrary to Played Games
         const fetchLibraries = async () => {
-            const currentLibrary : Library = await libraryApi.getLibrary(libraryId);
+            const currentLibrary : LibraryPreview = await libraryApi.getLibraryWithGames(libraryId);
             setCurrentLibrary(currentLibrary);
             setCurrentGames(currentLibrary?.games || []);
         }
@@ -37,7 +35,6 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
                 <div>
                     {(currentGames.map((game) => {
                         // TODO: Add routing to link to game page
-                       
                         return  <p>{game.name}</p>;
                      })
                     )}

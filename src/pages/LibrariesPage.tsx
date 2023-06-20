@@ -4,6 +4,7 @@ import * as libraryApi from "../api/libraryApi";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import Game from "../interfaces/Game";
 import GamePreview from "../interfaces/GamePreview";
+import { homeUiUrl } from "../constants/ApiConstants";
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
@@ -54,9 +55,10 @@ export default function LibrariesPage() {
             </h1>
             <div>
                 {(userLibraries.map((preview) => {
-                    // TODO: Add routing to link to game page
                     return <div>
-                        <h1>{preview.name}</h1>
+                        <h1 style={{zIndex: 10}}>
+                            <a href={`${homeUiUrl}`+"libraries/"+preview.id}>{preview.name}</a>
+                        </h1>
                             {/* For now we'll render the first 5 games in each library */}
                             {/* TODO: game icon should link to game page? We'll need to include icon in the game response from the backend */}
                             {getFirstFiveGames(preview)}
