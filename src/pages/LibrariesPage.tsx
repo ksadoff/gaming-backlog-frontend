@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import * as libraryApi from "../api/libraryApi";
-// import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
+import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import Game from "../interfaces/Game";
 import GamePreview from "../interfaces/GamePreview";
 import { homeUiUrl } from "../constants/ApiConstants";
+import CreateLibraryModal from "../components/CreateLibraryModal";
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
+    // TODO: Have library creation modal return list of libraries with new one added,
+    // so that we can automatically rerender the page with the new library
+    // Define onSubmit in this page probably
     const [userLibraries, setUserLibraries] = useState<Array<LibraryPreview>>([]);
     const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
 
@@ -66,8 +70,8 @@ export default function LibrariesPage() {
                     })
                 )}
             </div>
-            {/* // <OpenLibraryModalButton text="+" onClick={() => setIsLibraryModalOpen(true)}/> */}
-            {/* //TODO: GB-56 Add modal */}
+            <OpenLibraryModalButton text="Create Library" onClick={() => setIsLibraryModalOpen(true)}/>
+            <CreateLibraryModal isOpen={isLibraryModalOpen} onClose={() => setIsLibraryModalOpen(false)}/>
             </>
     )
 }

@@ -13,6 +13,7 @@
     "@types/node": "^16.11.47",
     "@types/react": "^18.0.16",
     "@types/react-dom": "^18.0.6",
+    "@types/react-modal": "^3.16.0",
     "axios": "^0.27.2",
     "nth-check": "^2.0.1",
     "react": "^18.2.0",

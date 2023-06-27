@@ -22,7 +22,7 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
         }
 
         fetchLibraries();
-    }, [])
+    }, [libraryId])
 
     useEffect(() => {
         setCurrentGames(currentLibrary?.games || []);
