@@ -22,8 +22,8 @@ describe('Rendering LibraryPage', () => {
     setup()
   })
 
-  it('renders library title', async () => {
-    const title = await screen.findByText(/My Library/i);
-    expect(title).toBeInTheDocument();
+  it('renders library name', async () => {
+    const name = await screen.findByText(/My Library/i);
+    expect(name).toBeInTheDocument();
   })
 });

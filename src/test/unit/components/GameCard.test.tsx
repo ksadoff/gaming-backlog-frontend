@@ -8,12 +8,12 @@ describe('Rendering Game GameCard', () => {
   it('renders GameCard', () => {
     render(
       <GameCard 
-          gameTitle='Dragon Age'
-          gameDescription='Surprisingly few dragons.'
+          gameName='Dragon Age'
+          gameSummary='Surprisingly few dragons.'
           gameImage={["//images.igdb.com/igdb/image/upload/t_thumb/jrumdkrrox09wbtblrka.jpg"]} 
           gamePlatforms={["PS3"]} 
           gameGenres={["RPG"]} 
-          gameUniverses={["Dragon Age"]} 
+          gameFranchises={["Dragon Age"]}
           gameCompanies={["BioWare"]} 
           gameReleaseDate={["Nov 03, 2009"]}
           />);
@@ -21,15 +21,15 @@ describe('Rendering Game GameCard', () => {
     expect(text).toBeInTheDocument();
   })
 
-  it('renders game title', () => {
+  it('renders game name', () => {
     render(
       <GameCard 
-          gameTitle='Dragon Age: Inquisition'
-          gameDescription='Surprisingly few dragons.'
+          gameName='Dragon Age: Inquisition'
+          gameSummary='Surprisingly few dragons.'
           gameImage={["//images.igdb.com/igdb/image/upload/t_thumb/jrumdkrrox09wbtblrka.jpg"]} 
           gamePlatforms={["PS3"]} 
           gameGenres={["RPG"]} 
-          gameUniverses={["Dragon Age"]} 
+          gameFranchises={["Dragon Age"]}
           gameCompanies={["BioWare"]} 
           gameReleaseDate={["Nov 03, 2009"]}
           />);
@@ -37,19 +37,19 @@ describe('Rendering Game GameCard', () => {
     expect(title).toBeInTheDocument();
   })
 
-  it('renders game description', () => {
+  it('renders game summary', () => {
     render(
       <GameCard 
-          gameTitle='Dragon Age'
-          gameDescription='Surprisingly few dragons.'
+          gameName='Dragon Age'
+          gameSummary='Surprisingly few dragons.'
           gameImage={["//images.igdb.com/igdb/image/upload/t_thumb/jrumdkrrox09wbtblrka.jpg"]} 
           gamePlatforms={["PS3"]} 
           gameGenres={["RPG"]} 
-          gameUniverses={["Dragon Age"]} 
+          gameFranchises={["Dragon Age"]}
           gameCompanies={["BioWare"]} 
           gameReleaseDate={["Nov 03, 2009"]}
           />);
-    const description = screen.getByText(/Surprisingly few dragons./);
-    expect(description).toBeInTheDocument();
+    const summary = screen.getByText(/Surprisingly few dragons./);
+    expect(summary).toBeInTheDocument();
   })
 });

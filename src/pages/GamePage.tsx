@@ -21,7 +21,7 @@ export default function GamePage({ gameId }: GamePageProps) {
         fetchGame();
     }, [])
 
-    const getTitle = () => {
+    const getName = () => {
         return currentGame?.name || ""
     }
 
@@ -29,7 +29,7 @@ export default function GamePage({ gameId }: GamePageProps) {
         return currentGame?.images || [];
     }
 
-    const getDescription = () => {
+    const getSummary = () => {
         return currentGame?.summary || "";
     }
 
@@ -41,7 +41,7 @@ export default function GamePage({ gameId }: GamePageProps) {
         return currentGame?.genres || []
     }
 
-    const getUniverses = () => {
+    const getFranchises = () => {
         return currentGame?.franchises || []
     }
 
@@ -56,12 +56,12 @@ export default function GamePage({ gameId }: GamePageProps) {
     return (
     // We'll want a page header at some point
     <GameCard 
-        gameTitle = {getTitle()} 
+        gameName= {getName()}
         gameImage={getImage()}
-        gameDescription={getDescription()}
+        gameSummary={getSummary()}
         gamePlatforms = {getPlatforms()}
         gameGenres = {getGenres()}
-        gameUniverses = {getUniverses()}
+        gameFranchises= {getFranchises()}
         gameCompanies = {getCompanies()}
         gameReleaseDate = {getReleaseDate()}
     />

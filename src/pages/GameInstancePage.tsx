@@ -14,10 +14,8 @@ interface GameId {
 export default function GameInstancePage({gameId}: GameId) {
     let emptyGame: GameInstance = { name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
     const [currentGame, setCurrentGame] = useState<GameInstance>(emptyGame);
-    console.log(currentGame)
 
     useEffect(() => {
-        // set currentGame
         const fetchGame = async () => {
             const currentGame : GameInstance = await gameApi.getGameInstance(gameId);
             setCurrentGame(currentGame);
@@ -26,16 +24,15 @@ export default function GameInstancePage({gameId}: GameId) {
         fetchGame();
     }, [gameId])
 
-    const getTitle = () => {
+    const getName = () => {
         return currentGame?.name || ""
     }
 
     const getImage = () => {
-        console.log(`Current Image: ${currentGame.images}`)
         return currentGame?.images || [];
     }
 
-    const getDescription = () => {
+    const getSummary = () => {
         return currentGame?.summary || "";
     }
 
@@ -47,7 +44,7 @@ export default function GameInstancePage({gameId}: GameId) {
         return currentGame?.genres || []
     }
 
-    const getUniverses = () => {
+    const getFranchises = () => {
         return currentGame?.franchises || []
     }
 
@@ -88,18 +85,18 @@ export default function GameInstancePage({gameId}: GameId) {
     }
 
     const getDateAdded = () => {
-        return currentGame?.dateAdded || ""
+        return currentGame?.dateAdded || undefined
     }
 
     return (
     // We'll want a page header at some point
     <GameCard 
-        gameTitle = {getTitle()} 
-        gameImage={getImage()} 
-        gameDescription={getDescription()}
+        gameName = {getName()}
+        gameImage = {getImage()}
+        gameSummary = {getSummary()}
         gamePlatforms = {getPlatforms()}
         gameGenres = {getGenres()}
-        gameUniverses = {getUniverses()}
+        gameFranchises = {getFranchises()}
         gameCompanies = {getCompanies()}
         gameReleaseDate = {getReleaseDate()}
         gameRating = {getGameRating()}

@@ -5,7 +5,6 @@ import GameInstance from "../interfaces/GameInstance";
 // TODO: most likely, game instance ids will be passed from library.
 
 export const getGame = async (id: string): Promise<Game> => {
-    console.log("shouldn't be here")
     const response = await fetch(homeUrl + gamesBaseUrl + `${id}`, {
         method: "GET",
     });

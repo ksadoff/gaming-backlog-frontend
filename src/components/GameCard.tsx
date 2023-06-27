@@ -6,12 +6,12 @@ import OpenLibraryModalButton from "./OpenLibraryModalButton";
 // TODO: create game page to use this card
 // for right now assume all info comes from game API
 interface GameCardProps {
-    gameTitle: string;
+    gameName: string;
     gameImage: any;
-    gameDescription: string;
+    gameSummary: string;
     gamePlatforms: Array<string>;
     gameGenres: Array<string>;
-    gameUniverses: Array<string>;
+    gameFranchises: Array<string>;
     gameCompanies: Array<string>;
     gameReleaseDate: Array<string>;
     gameRating?: number;
@@ -21,7 +21,7 @@ interface GameCardProps {
     yearReceived?: number;
     notes?: string;
     platformsOwnedOn?: Array<string>;
-    dateAdded?: String;
+    dateAdded?: Date;
 
 }
 
@@ -31,12 +31,12 @@ export function GameCard(gameCardProps : GameCardProps ) {
 
     return (
         <div>        
-            <h1>{gameCardProps.gameTitle}</h1>
+            <h1>{gameCardProps.gameName}</h1>
             <img 
             src = {gameCardProps.gameImage[0]}
             alt = "Game"
             />
-            <p>{gameCardProps.gameDescription}</p>
+            <p>{gameCardProps.gameSummary}</p>
             <div>
                 {(gameCardProps.gamePlatforms.map((platform) => {
                     return <p>{platform}</p>
@@ -48,8 +48,8 @@ export function GameCard(gameCardProps : GameCardProps ) {
                 }))}
             </div>
             <div>
-                {(gameCardProps.gameUniverses.map((universe) => {
-                    return <p>{universe}</p>
+                {(gameCardProps.gameFranchises.map((franchise) => {
+                    return <p>{franchise}</p>
                 }))}
             </div>
             <div>
@@ -73,7 +73,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
                     return <p>{platform}</p>
                 }))}
             </div>
-            <p>{gameCardProps?.dateAdded}</p>
+            <p>{gameCardProps?.dateAdded?.toDateString()}</p>
             <div>
                 <OpenLibraryModalButton text="Add to Library" onClick={addToLibrary}></OpenLibraryModalButton>
             </div>

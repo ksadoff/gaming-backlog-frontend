@@ -14,5 +14,5 @@ export default interface GameInstance {
     yearReceived?: number;
     notes?: string;
     platformsOwnedOn?: Array<string>;
-    dateAdded?: string; // TODO: eventually turn into Date
+    dateAdded?: Date;
 }
