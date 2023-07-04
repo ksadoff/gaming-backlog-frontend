@@ -6,6 +6,7 @@ import Game from "../interfaces/Game";
 import GamePreview from "../interfaces/GamePreview";
 import { homeUiUrl } from "../constants/ApiConstants";
 import CreateLibraryModal from "../components/CreateLibraryModal";
+import LibraryRequest from '../interfaces/LibraryRequest';
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
@@ -15,6 +16,17 @@ export default function LibrariesPage() {
     const [userLibraries, setUserLibraries] = useState<Array<LibraryPreview>>([]);
     const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
 
+    const onCreateNewLibrary = async (libraryName: string) => {
+        const libraryToCreate: LibraryRequest = {
+            name: libraryName,
+            games: [], // for now we only support creating empty library
+        };
+
+        const updatedLibraries = userLibraries;
+        const newLibrary = await libraryApi.createLibrary(libraryToCreate);
+        updatedLibraries.push(newLibrary);
+        setUserLibraries(updatedLibraries);
+    }
     const gamesToPreviews = (games: Array<Game>) => {
         const gamePreviews = new Array<GamePreview>;
         games.forEach(game => gamePreviews.push({ id: game.id, name: game.name}));
@@ -71,7 +83,7 @@ export default function LibrariesPage() {
                 )}
             </div>
             <OpenLibraryModalButton text="Create Library" onClick={() => setIsLibraryModalOpen(true)}/>
-            <CreateLibraryModal isOpen={isLibraryModalOpen} onClose={() => setIsLibraryModalOpen(false)}/>
+            <CreateLibraryModal isOpen={isLibraryModalOpen} onClose={() => setIsLibraryModalOpen(false)} onSubmit={onCreateNewLibrary}/>
             </>
     )
 }

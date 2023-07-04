@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import LibraryRequest from '../interfaces/LibraryRequest';
-import * as libraryApi from "../api/libraryApi";
 
 const customStyles = {
     content: {
@@ -18,18 +16,14 @@ const customStyles = {
 interface CreateLibraryModalProps {
     isOpen: boolean;
     onClose: any;
+    onSubmit: any;
 }
 
-export default function CreateLibraryModal({ isOpen, onClose,  }: CreateLibraryModalProps) {
+export default function CreateLibraryModal({ isOpen, onClose, onSubmit }: CreateLibraryModalProps) {
     const [libraryName, setLibraryName] = useState('');
 
-    const onSubmit = async () => {
-        const newLibrary: LibraryRequest = {
-            name: libraryName,
-            games: [], // for now we only support creating empty library
-        };
-
-        await libraryApi.createLibrary(newLibrary);
+    const onSubmitLibrary = async () => {
+        await onSubmit(libraryName);
         onClose();
     }
 
@@ -43,10 +37,10 @@ export default function CreateLibraryModal({ isOpen, onClose,  }: CreateLibraryM
             <h2>Create New Library</h2>
         <div>Enter your library name here</div>
         <form>
-          <input type="text" onChange={(e) => setLibraryName(e.target.value)}/>
+          <input data-testid="libraryName" type="text" onChange={(e) => setLibraryName(e.target.value)}/>
         </form>
         <button onClick={onClose}>close</button>
-        <button onClick={onSubmit}>submit</button>
+        <button onClick={onSubmitLibrary}>submit</button>
         </Modal>
     )
 }

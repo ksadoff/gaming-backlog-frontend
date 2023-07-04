@@ -27,7 +27,7 @@ export function getLibraryWithGames(id: string): Promise<LibraryPreview> {
     .catch(err => console.log(err));
 }
 
-export function createLibrary(library: LibraryRequest): Promise<LibraryRequest> {
+export function createLibrary(library: LibraryRequest): Promise<Library> {
     return fetch(homeUrl + librariesBaseUrl, {
         method: "POST",
         body: JSON.stringify(library),
