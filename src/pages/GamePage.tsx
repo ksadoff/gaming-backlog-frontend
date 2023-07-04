@@ -1,28 +1,69 @@
 import { GameCard } from "../components/GameCard";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Game from "../interfaces/Game";
+import * as gameApi from "../api/gameApi";
 
 interface GamePageProps {
-    id: string;
+    gameId: string;
 }
 
-export default function GamePage({ id }: GamePageProps) {
+export default function GamePage({ gameId }: GamePageProps) {
+    let emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
+    const [currentGame, setCurrentGame] = useState<Game>(emptyGame);
 
-    const getTitle = () => {
-        //TODO: fetch title from API
-        return "Knights of the Old Republic";
+    useEffect(() => {
+        // set currentGame
+        const fetchGame = async () => {
+            const currentGame : Game = await gameApi.getGame(gameId);
+            setCurrentGame(currentGame);
+        }
+
+        fetchGame();
+    }, [])
+
+    const getName = () => {
+        return currentGame?.name || ""
     }
 
-    const getImage = () => {
-        //TODO: fetch image from API 
+    const getImage = ()  => {
+        return currentGame?.images || [];
     }
 
-    const getDescription = () => {
-        //TODO: fetch description from API
-        return "The best Star Wars Game";
+    const getSummary = () => {
+        return currentGame?.summary || "";
+    }
+
+    const getPlatforms = () => {
+        return currentGame?.platforms || []
+    }
+
+    const getGenres = () => {
+        return currentGame?.genres || []
+    }
+
+    const getFranchises = () => {
+        return currentGame?.franchises || []
+    }
+
+    const getCompanies = () => {
+        return currentGame?.companies || []
+    }
+    
+    const getReleaseDate = () => {
+        return currentGame?.releaseDate || []
     }
 
     return (
     // We'll want a page header at some point
-    <GameCard gameTitle={getTitle()} gameImage={getImage()} gameDescription={getDescription()}/>
+    <GameCard 
+        gameName= {getName()}
+        gameImage={getImage()}
+        gameSummary={getSummary()}
+        gamePlatforms = {getPlatforms()}
+        gameGenres = {getGenres()}
+        gameFranchises= {getFranchises()}
+        gameCompanies = {getCompanies()}
+        gameReleaseDate = {getReleaseDate()}
+    />
     )
 }

@@ -2,34 +2,39 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { GameCard } from '../../../components/GameCard';
 
-// const img = "path-to-image"
+describe('Rendering Game GameCard', () => {
 
-describe('Rendering GameCard', () => {
-  beforeEach(() => {
+  let setup = () => {
     render(
-    <GameCard 
-        gameTitle='Dragon Age' 
-        gameDescription='Surprisingly few dragons.'
-        gameImage=''
-     />);
-  });
+        <GameCard
+            gameName='Dragon Age: Inquisition'
+            gameSummary='Surprisingly few dragons.'
+            gameImage={["//images.igdb.com/igdb/image/upload/t_thumb/jrumdkrrox09wbtblrka.jpg"]}
+            gamePlatforms={["PS3"]}
+            gameGenres={["RPG"]}
+            gameFranchises={["Dragon Age"]}
+            gameCompanies={["BioWare"]}
+            gameReleaseDate={["Nov 03, 2009"]}
+        />);
+  }
+
+  beforeEach(async () => {
+    setup()
+  })
+  
 
   it('renders GameCard', () => {
     const text = screen.getByText(/Add to Library/i);
     expect(text).toBeInTheDocument();
   })
-  // TODO: Once functionality in GameCard is working, uncomment these tests
-//   it('renders game title', () => {
-    // const title = screen.getByText(/Dragon Age/i);
-    // expect(title).toBeInTheDocument();
-//   })
 
-//   it('renders game description', () => {
-    // const description = screen.getByText(/Surprisingly few dragons./i);
-    // expect(title).toBeInTheDocument();
-//   })
+  it('renders game name', () => {
+    const name = screen.getByText(/Dragon Age: Inquisition/);
+    expect(name).toBeInTheDocument();
+  })
 
-//   it('renders game image', () => {
-    // expect(img).toBeInTheDocument();
-//   })
+  it('renders game summary', () => {
+    const summary = screen.getByText(/Surprisingly few dragons./);
+    expect(summary).toBeInTheDocument();
+  })
 });
