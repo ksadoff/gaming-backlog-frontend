@@ -7,23 +7,29 @@ const getLibrariesStub = jest.spyOn(libraryApi, 'getAllLibrariesWithGames');
 const createLibraryStub = jest.spyOn(libraryApi, 'createLibrary');
 
 describe('Rendering LibrariesPage', () => {
-  beforeEach(async () => {
-    getLibrariesStub.mockResolvedValue([{id: "123", 
-    name: "Want to Play", 
+let setup = () => {
+  getLibrariesStub.mockResolvedValue([{id: "123",
+    name: "Want to Play",
     games: [{
-        id: "123", 
-        name: "Disco Elysium", 
-        platforms: ["PC"], 
-        genres: ["RPG"], 
+        id: "123",
+        name: "Disco Elysium",
+        platforms: ["PC"],
+        genres: ["RPG"],
         franchises: [],
         companies: ["ZA/UM"],
         releaseDate: ["2019-10-15"],
         summary: "Kim Kitsuragi is the character ever.",
-        image: "de.png"}], 
+        images: ["de.png"]}],
     createDate: new Date()}])
+    
     act(() => {
-        render(<LibrariesPage />)
-    });
+      render(<LibrariesPage />)
+  });
+};
+
+describe('Rendering LibrariesPage', () => {
+  beforeEach(async () => {
+    setup()
   });
 
   it('renders page title', () => {

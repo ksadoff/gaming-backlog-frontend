@@ -7,5 +7,5 @@ export default interface Game {
     companies: Array<string>
     releaseDate: Array<string>
     summary: string,
-    image: string
+    images: Array<string>
 }
