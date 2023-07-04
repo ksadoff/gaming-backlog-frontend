@@ -35,12 +35,12 @@ export default function CreateLibraryModal({ isOpen, onClose, onSubmit }: Create
         style={customStyles}
         >
             <h2>Create New Library</h2>
-        <div>Enter your library name here</div>
-        <form>
-          <input data-testid="libraryName" type="text" onChange={(e) => setLibraryName(e.target.value)}/>
-        </form>
-        <button onClick={onClose}>close</button>
-        <button onClick={onSubmitLibrary}>submit</button>
+            <div>Enter your library name here</div>
+            <form>
+                <input data-testid="libraryName" type="text" onChange={(e) => setLibraryName(e.target.value)}/>
+            </form>
+            <button onClick={onClose}>close</button>
+            <button onClick={onSubmitLibrary}>submit</button>
         </Modal>
     )
 }

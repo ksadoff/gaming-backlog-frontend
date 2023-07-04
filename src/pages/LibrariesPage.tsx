@@ -10,9 +10,6 @@ import LibraryRequest from '../interfaces/LibraryRequest';
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
-    // TODO: Have library creation modal return list of libraries with new one added,
-    // so that we can automatically rerender the page with the new library
-    // Define onSubmit in this page probably
     const [userLibraries, setUserLibraries] = useState<Array<LibraryPreview>>([]);
     const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
 
