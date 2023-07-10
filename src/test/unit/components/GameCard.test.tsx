@@ -7,6 +7,7 @@ describe('Rendering Game GameCard', () => {
   let setup = () => {
     render(
         <GameCard
+            gameId = "testID"
             gameName='Dragon Age: Inquisition'
             gameSummary='Surprisingly few dragons.'
             gameImage={["//images.igdb.com/igdb/image/upload/t_thumb/jrumdkrrox09wbtblrka.jpg"]}

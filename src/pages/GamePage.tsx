@@ -55,7 +55,8 @@ export default function GamePage({ gameId }: GamePageProps) {
 
     return (
     // We'll want a page header at some point
-    <GameCard 
+    <GameCard
+        gameId={gameId}
         gameName= {getName()}
         gameImage={getImage()}
         gameSummary={getSummary()}

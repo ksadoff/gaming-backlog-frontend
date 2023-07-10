@@ -34,3 +34,15 @@ export function createLibrary(library: Library): Promise<Library> {
     .then((response) => response.json())
     .catch(err => console.log(err));
 }
+
+export function addToLibrary(gameId: string, libraryId: string): Promise<string> {
+    return fetch(homeUrl + librariesBaseUrl  + `${libraryId}/addToLibrary`, {
+        method: "PUT",
+        body: JSON.stringify({
+            "gameId": gameId
+        })
+    })
+        .then((response) => response.json())
+        .catch(err => console.log(err));
+}
+

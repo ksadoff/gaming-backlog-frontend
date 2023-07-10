@@ -2,10 +2,12 @@ import React from "react";
 
 // components
 import OpenLibraryModalButton from "./OpenLibraryModalButton";
+import * as libraryApi from "../api/libraryApi";
 
 // TODO: create game page to use this card
 // for right now assume all info comes from game API
 interface GameCardProps {
+    gameId: string;
     gameName: string;
     gameImage: any;
     gameSummary: string;
@@ -26,8 +28,10 @@ interface GameCardProps {
 }
 
 export function GameCard(gameCardProps : GameCardProps ) {
-    // will eventually be an API function
-    const addToLibrary = () => true;
+    // when we have users in place, make library id dynamic
+    const addToLibrary = async (gameId: string, libraryId: string) => {
+        await libraryApi.addToLibrary(gameId, libraryId)
+    };
 
     return (
         <div>        
@@ -75,7 +79,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
             </div>
             <p>{gameCardProps?.dateAdded?.toDateString()}</p>
             <div>
-                <OpenLibraryModalButton text="Add to Library" onClick={addToLibrary}></OpenLibraryModalButton>
+                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, "621d8c08b04b379ef6c12286")}></OpenLibraryModalButton>
             </div>
             {/* TODO: GB-56 Add modal here */}
 
