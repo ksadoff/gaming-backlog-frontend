@@ -33,7 +33,6 @@ export default function LibrariesPage() {
     useEffect(() => {
         const fetchLibraries = async () => {
             const libraries = await libraryApi.getAllLibrariesWithGames();
-            console.log(libraries)
             const libraryPreviews = new Array<LibraryPreview>;
             libraries.forEach(library => libraryPreviews.push({ id: library.id, name: library.name, games: gamesToPreviews(library.games) }))
             setUserLibraries(libraryPreviews);
