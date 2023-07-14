@@ -10,6 +10,14 @@ export function getAllLibrariesWithGames(): Promise<Library[]> {
     .catch(err => console.log(err));
 }
 
+export function getAllLibraries(): Promise<Library[]> {
+    return fetch(homeUrl + librariesBaseUrl, {
+        method: "GET",
+    })
+        .then((response) => response.json())
+        .catch(err => console.log(err));
+}
+
 export function getLibrary(id: string): Promise<Library> {
     return fetch(homeUrl + librariesBaseUrl + `${id}`, {
         method: "GET",
@@ -35,14 +43,15 @@ export function createLibrary(library: Library): Promise<Library> {
     .catch(err => console.log(err));
 }
 
-export function addToLibrary(gameId: string, libraryId: string): Promise<string> {
+export function addToLibrary(gameId: string, libraryId: string): Promise<any> {
     return fetch(homeUrl + librariesBaseUrl  + `${libraryId}/addToLibrary`, {
         method: "PUT",
         body: JSON.stringify({
             "gameId": gameId
-        })
+        }),
+        headers: new Headers({'content-type': 'application/json'})
     })
-        .then((response) => response.json())
+        .then((response) => response.statusText)
         .catch(err => console.log(err));
 }
 

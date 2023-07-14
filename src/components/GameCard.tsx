@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Select from 'react-select'
 
 // components
 import OpenLibraryModalButton from "./OpenLibraryModalButton";
@@ -24,13 +25,33 @@ interface GameCardProps {
     notes?: string;
     platformsOwnedOn?: Array<string>;
     dateAdded?: Date;
+}
 
+interface LibraryOption {
+    label: string,
+    value: string
 }
 
 export function GameCard(gameCardProps : GameCardProps ) {
-    // when we have users in place, make library id dynamic
+    const [libraryOptions, setAllLibraryOptions] = useState<Array<LibraryOption>>([])
+    const [selectedLibrary, setSelectedLibrary] = useState("")
+
+    useEffect(() => {
+        const fetchAllLibraries = async () => {
+            const libraries = await libraryApi.getAllLibraries()
+            const libraryOptions = new Array<LibraryOption>()
+            libraries.forEach((library) => {
+                libraryOptions.push({ label: library.name, value: library.id })
+            } )
+            setAllLibraryOptions(libraryOptions)
+        }
+        fetchAllLibraries()
+    }, [])
+
     const addToLibrary = async (gameId: string, libraryId: string) => {
+        // todo: need to check if it's an instance or game
         await libraryApi.addToLibrary(gameId, libraryId)
+        console.log("Successfully added to library")
     };
 
     return (
@@ -79,10 +100,13 @@ export function GameCard(gameCardProps : GameCardProps ) {
             </div>
             <p>{gameCardProps?.dateAdded?.toDateString()}</p>
             <div>
-                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, "621d8c08b04b379ef6c12286")}></OpenLibraryModalButton>
+                <Select
+                    placeholder="Select a Library"
+                    options={libraryOptions}
+                    onChange={(library) => setSelectedLibrary(library!!.value)}
+                />
+                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}></OpenLibraryModalButton>
             </div>
-            {/* TODO: GB-56 Add modal here */}
-
         </div>
     )
 }
