@@ -1,6 +1,7 @@
 import { homeUrl, librariesBaseUrl } from "../constants/ApiConstants";
 import Library from "../interfaces/Library";
 import LibraryPreview from "../interfaces/LibraryPreview";
+import LibraryRequest from "../interfaces/LibraryRequest";
 
 export function getAllLibrariesWithGames(): Promise<Library[]> {
     return fetch(homeUrl + librariesBaseUrl + "withGames", {
@@ -34,10 +35,13 @@ export function getLibraryWithGames(id: string): Promise<LibraryPreview> {
     .catch(err => console.log(err));
 }
 
-export function createLibrary(library: Library): Promise<Library> {
+export function createLibrary(library: LibraryRequest): Promise<Library> {
     return fetch(homeUrl + librariesBaseUrl, {
         method: "POST",
         body: JSON.stringify(library),
+        headers: {
+            "Content-Type": "application/json",
+          },
     })
     .then((response) => response.json())
     .catch(err => console.log(err));
