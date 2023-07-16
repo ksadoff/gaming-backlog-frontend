@@ -5,8 +5,6 @@ import Select from 'react-select'
 import OpenLibraryModalButton from "./OpenLibraryModalButton";
 import * as libraryApi from "../api/libraryApi";
 
-// TODO: create game page to use this card
-// for right now assume all info comes from game API
 interface GameCardProps {
     gameId: string;
     gameName: string;
@@ -36,22 +34,22 @@ export function GameCard(gameCardProps : GameCardProps ) {
     const [libraryOptions, setAllLibraryOptions] = useState<Array<LibraryOption>>([])
     const [selectedLibrary, setSelectedLibrary] = useState("")
 
-    useEffect(() => {
-        const fetchAllLibraries = async () => {
-            const libraries = await libraryApi.getAllLibraries()
-            const libraryOptions = new Array<LibraryOption>()
-            libraries.forEach((library) => {
-                libraryOptions.push({ label: library.name, value: library.id })
-            } )
-            setAllLibraryOptions(libraryOptions)
-        }
-        fetchAllLibraries()
-    }, [])
+    const fetchAllLibraries = async () => {
+        const libraries = await libraryApi.getAllLibraries()
+        const libraryOptions = new Array<LibraryOption>()
+        libraries.forEach((library) => {
+            libraryOptions.push({ label: library.name, value: library.id })
+        } )
+        setAllLibraryOptions(libraryOptions)
+    }
 
     const addToLibrary = async (gameId: string, libraryId: string) => {
+        if (libraryId === "") {
+            alert("No library selected!")
+            return
+        }
         // todo: need to check if it's an instance or game
         await libraryApi.addToLibrary(gameId, libraryId)
-        console.log("Successfully added to library")
     };
 
     return (
@@ -103,9 +101,10 @@ export function GameCard(gameCardProps : GameCardProps ) {
                 <Select
                     placeholder="Select a Library"
                     options={libraryOptions}
+                    onMenuOpen={() => fetchAllLibraries()}
                     onChange={(library) => setSelectedLibrary(library!!.value)}
                 />
-                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}></OpenLibraryModalButton>
+                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}/>
             </div>
         </div>
     )
