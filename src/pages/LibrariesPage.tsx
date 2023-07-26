@@ -11,7 +11,23 @@ import LibraryRequest from '../interfaces/LibraryRequest';
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
     const [userLibraries, setUserLibraries] = useState<Array<LibraryPreview>>([]);
+    const [filteredLibraries, setFilteredLibraries] = useState<Array<LibraryPreview>>(userLibraries);
+    
     const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
+    const [sortAscending, setSortAscending] = useState(false);
+    const [filterTerm, setFilterTerm] = useState('')
+    
+    const handleFilter = (searchInput: string) => {
+        setFilterTerm(searchInput)
+        if (searchInput !== '') {
+        const newFilteredLibraries = [...userLibraries].filter((library) => {
+            return Object.values(library).join('').toLowerCase().includes(searchInput.toLowerCase())
+        });
+        setFilteredLibraries(newFilteredLibraries);
+    } else {
+        setFilteredLibraries(userLibraries);
+    }
+    }
 
     const onCreateNewLibrary = async (libraryName: string) => {
         const libraryToCreate: LibraryRequest = {
@@ -24,6 +40,7 @@ export default function LibrariesPage() {
         updatedLibraries.push(newLibrary);
         setUserLibraries(updatedLibraries);
     }
+
     const gamesToPreviews = (games: Array<Game>) => {
         const gamePreviews = new Array<GamePreview>;
         games.forEach(game => gamePreviews.push({ id: game.id, name: game.name}));
@@ -61,13 +78,28 @@ export default function LibrariesPage() {
             return list;
         }
     }
+
+function sortLibraries() {
+    const sortedLibraries = [...filteredLibraries].sort((a, b) => {
+        if (sortAscending) {
+            setSortAscending(false);
+            return a.name < b.name ? 1 : -1
+        }
+        setSortAscending(true);
+        return a.name > b.name ? 1 : -1
+    })
+    setFilteredLibraries(sortedLibraries);
+}
+
     return(
         <>
             <h1>
                 Libraries 
             </h1>
+            <button onClick={sortLibraries}>Sort {sortAscending ? "Ascending" : "Descending"}</button>
+            <input placeholder="Search..." type="search" value={filterTerm} onChange={(e) => handleFilter(e.target.value)}/>
             <div>
-                {(userLibraries.map((preview) => {
+                {(filteredLibraries.map((preview) => {
                     return <div>
                         <h1 style={{zIndex: 10}}>
                             <a href={`${homeUiUrl}`+"libraries/"+preview.id}>{preview.name}</a>
