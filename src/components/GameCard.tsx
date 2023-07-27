@@ -48,9 +48,11 @@ export function GameCard(gameCardProps : GameCardProps ) {
                 }))}
             </div>
             <div>
-                {(gameCardProps.gameFranchises.map((franchise) => {
+                { gameCardProps.gameFranchises ?
+                (gameCardProps.gameFranchises.map((franchise) => {
                     return <p>{franchise}</p>
-                }))}
+                }))
+                 : null }
             </div>
             <div>
                 {(gameCardProps.gameCompanies.map((company) => {
