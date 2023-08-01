@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as libraryApi from "../api/libraryApi";
 import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
@@ -14,7 +14,7 @@ export default function LibrariesPage() {
     const [filteredLibraries, setFilteredLibraries] = useState<Array<LibraryPreview>>(userLibraries);
     
     const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
-    const [sortAscending, setSortAscending] = useState(false);
+    const [sortAscending, setSortAscending] = useState(true);
     const [filterTerm, setFilterTerm] = useState('')
     
     const handleFilter = (searchInput: string) => {
@@ -53,6 +53,7 @@ export default function LibrariesPage() {
             const libraryPreviews = new Array<LibraryPreview>;
             libraries.forEach(library => libraryPreviews.push({ id: library.id, name: library.name, games: gamesToPreviews(library.games) }))
             setUserLibraries(libraryPreviews);
+            setFilteredLibraries(libraryPreviews);
         }
         fetchLibraries();
     }, [])
@@ -83,10 +84,10 @@ function sortLibraries() {
     const sortedLibraries = [...filteredLibraries].sort((a, b) => {
         if (sortAscending) {
             setSortAscending(false);
-            return a.name < b.name ? 1 : -1
+            return a.name > b.name ? 1 : -1
         }
         setSortAscending(true);
-        return a.name > b.name ? 1 : -1
+        return a.name < b.name ? 1 : -1
     })
     setFilteredLibraries(sortedLibraries);
 }
@@ -96,8 +97,12 @@ function sortLibraries() {
             <h1>
                 Libraries 
             </h1>
-            <button onClick={sortLibraries}>Sort {sortAscending ? "Ascending" : "Descending"}</button>
-            <input placeholder="Search..." type="search" value={filterTerm} onChange={(e) => handleFilter(e.target.value)}/>
+            <div>
+                <button onClick={sortLibraries}>Sort {sortAscending ? "Ascending" : "Descending"}</button>
+            </div>
+            <div>
+                <input data-testid="search" placeholder="Search..." type="search" value={filterTerm} onChange={(e) => handleFilter(e.target.value)}/>
+            </div>
             <div>
                 {(filteredLibraries.map((preview) => {
                     return <div>
