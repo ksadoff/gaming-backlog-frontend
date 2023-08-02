@@ -84,10 +84,10 @@ function sortLibraries() {
     const sortedLibraries = [...filteredLibraries].sort((a, b) => {
         if (sortAscending) {
             setSortAscending(false);
-            return a.name > b.name ? 1 : -1
+            return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         }
         setSortAscending(true);
-        return a.name < b.name ? 1 : -1
+        return a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
     })
     setFilteredLibraries(sortedLibraries);
 }
