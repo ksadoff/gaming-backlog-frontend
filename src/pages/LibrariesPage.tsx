@@ -42,7 +42,7 @@ export default function LibrariesPage() {
     }
 
     const gamesToPreviews = (games: Array<Game>) => {
-        const gamePreviews = new Array<GamePreview>;
+        const gamePreviews = new Array<GamePreview>();
         games.forEach(game => gamePreviews.push({ id: game.id, name: game.name}));
         return gamePreviews;
     }

@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Select from 'react-select'
 
 // components
 import OpenLibraryModalButton from "./OpenLibraryModalButton";
+import * as libraryApi from "../api/libraryApi";
 
-// TODO: create game page to use this card
-// for right now assume all info comes from game API
 interface GameCardProps {
+    gameId: string;
     gameName: string;
     gameImage: any;
     gameSummary: string;
@@ -22,12 +23,34 @@ interface GameCardProps {
     notes?: string;
     platformsOwnedOn?: Array<string>;
     dateAdded?: Date;
+}
 
+interface LibraryOption {
+    label: string,
+    value: string
 }
 
 export function GameCard(gameCardProps : GameCardProps ) {
-    // will eventually be an API function
-    const addToLibrary = () => true;
+    const [libraryOptions, setAllLibraryOptions] = useState<Array<LibraryOption>>([])
+    const [selectedLibrary, setSelectedLibrary] = useState("")
+
+    const fetchAllLibraries = async () => {
+        const libraries = await libraryApi.getAllLibraries()
+        const libraryOptions = new Array<LibraryOption>()
+        libraries.forEach((library) => {
+            libraryOptions.push({ label: library.name, value: library.id })
+        } )
+        setAllLibraryOptions(libraryOptions)
+    }
+
+    const addToLibrary = async (gameId: string, libraryId: string) => {
+        if (libraryId === "") {
+            alert("No library selected!")
+            return
+        }
+        // todo: need to check if it's an instance or game
+        await libraryApi.addToLibrary(gameId, libraryId)
+    };
 
     return (
         <div>        
@@ -48,9 +71,11 @@ export function GameCard(gameCardProps : GameCardProps ) {
                 }))}
             </div>
             <div>
-                {(gameCardProps.gameFranchises.map((franchise) => {
+                { gameCardProps.gameFranchises ?
+                (gameCardProps.gameFranchises.map((franchise) => {
                     return <p>{franchise}</p>
-                }))}
+                }))
+                 : null }
             </div>
             <div>
                 {(gameCardProps.gameCompanies.map((company) => {
@@ -75,10 +100,14 @@ export function GameCard(gameCardProps : GameCardProps ) {
             </div>
             <p>{gameCardProps?.dateAdded?.toDateString()}</p>
             <div>
-                <OpenLibraryModalButton text="Add to Library" onClick={addToLibrary}></OpenLibraryModalButton>
+                <Select
+                    placeholder="Select a Library"
+                    options={libraryOptions}
+                    onMenuOpen={() => fetchAllLibraries()}
+                    onChange={(library) => setSelectedLibrary(library!!.value)}
+                />
+                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}/>
             </div>
-            {/* TODO: GB-56 Add modal here */}
-
         </div>
     )
 }

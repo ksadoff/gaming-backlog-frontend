@@ -90,7 +90,8 @@ export default function GameInstancePage({gameId}: GameId) {
 
     return (
     // We'll want a page header at some point
-    <GameCard 
+    <GameCard
+        gameId={gameId}
         gameName = {getName()}
         gameImage = {getImage()}
         gameSummary = {getSummary()}
