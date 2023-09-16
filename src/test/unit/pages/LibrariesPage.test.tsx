@@ -10,7 +10,7 @@ let setup = () => {
   getLibrariesStub.mockResolvedValue([{id: "123",
     name: "Want to Play",
     games: [{
-        id: "123",
+        id: "1",
         name: "Disco Elysium",
         platforms: ["PC"],
         genres: ["RPG"],
@@ -20,10 +20,10 @@ let setup = () => {
         summary: "Kim Kitsuragi is the character ever.",
         images: ["de.png"]}],
     createDate: new Date()},
-    {id: "123",
+    {id: "456",
     name: "Finished",
     games: [{
-        id: "456",
+        id: "2",
         name: "Kirby and the Forgotten Land",
         platforms: ["Nintendo Switch"],
         genres: ["Platform"],

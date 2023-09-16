@@ -5,6 +5,7 @@ import LibrariesPage from './pages/LibrariesPage';
 import LibraryPage from './pages/LibraryPage';
 import GamePage from './pages/GamePage';
 import GameInstancePage from "./pages/GameInstancePage";
+import UserProfilePage from './pages/UserProfilePage';
 
 const App = () => {
   let emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
@@ -35,6 +36,7 @@ const App = () => {
             custome game page */}
             <Route path="/games/:id" element={<GamePageWrapper/>}></Route>
             <Route path="/games/instances/:id" element={<GameInstancePageWrapper/>}></Route>
+            <Route path="/users/:id" element={<UserProfilePageWrapper/>}></Route>
           </Routes>
        </BrowserRouter>)
 }
@@ -63,6 +65,16 @@ function GameInstancePageWrapper() {
   const { id } = useParams();
   if (id) {
     return <GameInstancePage gameId={id} />;
+  } else {
+    //return user to their default libraries page
+    return <LibrariesPage />;
+  }
+}
+
+function UserProfilePageWrapper() {
+  const { id } = useParams();
+  if (id) {
+    return <UserProfilePage id={id} />;
   } else {
     //return user to their default libraries page
     return <LibrariesPage />;

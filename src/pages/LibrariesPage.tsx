@@ -58,26 +58,15 @@ export default function LibrariesPage() {
         fetchLibraries();
     }, [])
 
-    const getFirstFiveGames = (preview: LibraryPreview ) => {
-        if (preview.games.length < 5) {
-            return (
-                <div>
-                    {(preview.games.map((game) => 
-                    <a>
-                        <p>{game.name}</p>
-                    </a>))}
-                </div>
-            )
-        } else {
-            const list = [];
-            for (let i = 0; i < 5; i++) {
-                list.push(
-                <a>
-                    <p>{preview.games[i].name}</p>
-                </a>)
-            }
-            return list;
+    const getFirstFiveGames = (preview: LibraryPreview) => {
+        const list = [];
+        for (let i = 0; i < 5; i++) {
+            list.push(
+            <a key={i}>
+                <p>{preview.games[i]?.name}</p>
+            </a>)
         }
+        return list;
     }
 
 function sortLibraries() {
@@ -105,7 +94,7 @@ function sortLibraries() {
             </div>
             <div>
                 {(filteredLibraries.map((preview) => {
-                    return <div>
+                    return <div key={preview.id}>
                         <h1 style={{zIndex: 10}}>
                             <a href={`${homeUiUrl}`+"libraries/"+preview.id}>{preview.name}</a>
                         </h1>
