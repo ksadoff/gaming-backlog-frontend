@@ -5,7 +5,7 @@ import LibraryRequest from "../interfaces/LibraryRequest";
 
 export function getAllLibrariesWithGames(): Promise<Library[]> {
     return fetch(homeUrl + librariesBaseUrl + "withGames", {
-        method: "GET",
+        method: "GET"
     })
     .then((response) => response.json())
     .catch(err => console.log(err));
@@ -13,7 +13,7 @@ export function getAllLibrariesWithGames(): Promise<Library[]> {
 
 export function getAllLibraries(): Promise<Library[]> {
     return fetch(homeUrl + librariesBaseUrl, {
-        method: "GET",
+        method: "GET"
     })
         .then((response) => response.json())
         .catch(err => console.log(err));
@@ -21,7 +21,7 @@ export function getAllLibraries(): Promise<Library[]> {
 
 export function getLibrary(id: string): Promise<Library> {
     return fetch(homeUrl + librariesBaseUrl + `${id}`, {
-        method: "GET",
+        method: "GET"
     })
     .then((response) => response.json())
     .catch(err => console.log(err));
@@ -29,7 +29,7 @@ export function getLibrary(id: string): Promise<Library> {
 
 export function getLibraryWithGames(id: string): Promise<LibraryPreview> {
     return fetch(homeUrl + librariesBaseUrl + `${id}/withGames`, {
-        method: "GET",
+        method: "GET"
     })
     .then((response) => response.json())
     .catch(err => console.log(err));
@@ -41,7 +41,7 @@ export function createLibrary(library: LibraryRequest): Promise<Library> {
         body: JSON.stringify(library),
         headers: {
             "Content-Type": "application/json",
-          },
+          }
     })
     .then((response) => response.json())
     .catch(err => console.log(err));

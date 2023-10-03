@@ -1,30 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Route, BrowserRouter, Routes, useParams } from 'react-router-dom';
-import Game from './interfaces/Game'
 import LibrariesPage from './pages/LibrariesPage';
 import LibraryPage from './pages/LibraryPage';
 import GamePage from './pages/GamePage';
 import GameInstancePage from "./pages/GameInstancePage";
 import UserProfilePage from './pages/UserProfilePage';
+import RegistrationPage from './pages/RegistrationPage';
 
 const App = () => {
-  let emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
-  const [data, setData] = useState(emptyGame);
-
-    useEffect( () => {
-        fetch(`/games/${emptyGame.name}`)
-        .then((res) => res.json())
-        .then((data) => setData(data));
-    }, [emptyGame]);
-
-    const joinStrings = (arr: Array<string>) : string => {
-      if (arr.length <= 1) return arr[0]
-      let vals = ""
-      let count = 0
-      arr.reduce((acc, cur) => acc ? `${acc}, ${cur}` : cur)
-      return vals
-    }
-
     return (
         <BrowserRouter>
           <Routes>
@@ -37,6 +20,7 @@ const App = () => {
             <Route path="/games/:id" element={<GamePageWrapper/>}></Route>
             <Route path="/games/instances/:id" element={<GameInstancePageWrapper/>}></Route>
             <Route path="/users/:id" element={<UserProfilePageWrapper/>}></Route>
+            <Route  path="/register" element={<RegistrationPage/>}></Route>
           </Routes>
        </BrowserRouter>)
 }
