@@ -43,7 +43,6 @@ export default function RegistrationPage() {
                         name="displayName"
                         value={user.displayName}
                         onChange={handleChange}
-                        required
                     />
                 </div>
                 <div>
