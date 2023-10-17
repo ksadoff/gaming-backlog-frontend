@@ -1,5 +1,5 @@
 export default interface UserRequest {
-    displayName: string;
+    displayName?: string;
     password: string;
     email: string;
 }

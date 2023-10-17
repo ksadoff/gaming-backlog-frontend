@@ -1,4 +1,4 @@
-import { homeUrl, librariesBaseUrl } from "../constants/ApiConstants";
+import { homeUrl, librariesBaseUrl } from "../constants/Routes";
 import Library from "../interfaces/Library";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import LibraryRequest from "../interfaces/LibraryRequest";

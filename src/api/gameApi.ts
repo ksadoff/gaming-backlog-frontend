@@ -1,4 +1,4 @@
-import { homeUrl, gamesBaseUrl, gameInstancesBaseUrl } from "../constants/ApiConstants";
+import { homeUrl, gamesBaseUrl, gameInstancesBaseUrl } from "../constants/Routes";
 import Game from "../interfaces/Game";
 import GameInstance from "../interfaces/GameInstance";
 

@@ -4,7 +4,7 @@ import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import Game from "../interfaces/Game";
 import GamePreview from "../interfaces/GamePreview";
-import { homeUiUrl } from "../constants/ApiConstants";
+import { homeUiUrl } from "../constants/Routes";
 import CreateLibraryModal from "../components/CreateLibraryModal";
 import LibraryRequest from '../interfaces/LibraryRequest';
 
