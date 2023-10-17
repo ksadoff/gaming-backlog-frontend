@@ -6,14 +6,14 @@ import GameInstance from "../interfaces/GameInstance";
 
 export const getGame = async (id: string): Promise<Game> => {
     const response = await fetch(homeUrl + gamesBaseUrl + `${id}`, {
-        method: "GET",
+        method: "GET"
     });
     return await response.json();
 }
 
 export const getGameInstance = async (id: string): Promise<GameInstance> => {
     const response = await fetch(homeUrl + gameInstancesBaseUrl + `${id}`, {
-        method: "GET",
+        method: "GET"
     });
     return await response.json();
 }
