@@ -29,7 +29,7 @@ describe('Login Component', () => {
     const mockedNavigate = jest.fn();
     mockedUseNavigate.mockReturnValue(mockedNavigate);
 
-    const { getByLabelText, getByRole, getByText } = render(<LoginPage />);
+    const { getByLabelText, getByRole } = render(<LoginPage />);
 
     fireEvent.change(getByLabelText('Email:'), { target: { value: 'test@example.com' } });
     fireEvent.change(getByLabelText('Password:'), { target: { value: 'password123' } });
