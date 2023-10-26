@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import UserRequest from '../interfaces/UserRequest';
 import * as userApi from "../api/userApi";
+import { useUser } from '../UserContext';
 
 export default function RegistrationPage() {
     const navigate = useNavigate();
+    const { setUserId } = useUser();
 
     const [user, setUser] = useState<UserRequest>({
         displayName: '',
@@ -20,7 +22,7 @@ export default function RegistrationPage() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        await userApi.registerUser(user); 
+        const userResponse = await userApi.registerUser(user); 
         console.log('User registered:', user);
         // Reset the form after submission
         setUser({
@@ -28,7 +30,8 @@ export default function RegistrationPage() {
             password: '',
             email: ''
         });
-        navigate("/libraries");
+        setUserId(userResponse.id)
+        navigate("/"+ userResponse.id+ "/libraries");
     };
 
     return (

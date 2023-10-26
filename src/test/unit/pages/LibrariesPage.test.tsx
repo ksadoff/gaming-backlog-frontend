@@ -3,7 +3,7 @@ import LibrariesPage from '../../../pages/LibrariesPage';
 import * as libraryApi from "../../../api/libraryApi";
 import LibraryRequest from '../../../interfaces/LibraryRequest';
 
-const getLibrariesStub = jest.spyOn(libraryApi, 'getAllLibrariesWithGames');
+const getLibrariesStub = jest.spyOn(libraryApi, 'getAllUserLibrariesWithGames');
 const createLibraryStub = jest.spyOn(libraryApi, 'createLibrary');
 
 let setup = () => {

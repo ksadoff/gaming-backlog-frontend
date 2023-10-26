@@ -1,11 +1,11 @@
-import { homeUrl, librariesBaseUrl } from "../constants/Routes";
+import { homeUrl, librariesBaseUrl, usersBaseUrl } from "../constants/Routes";
 import Library from "../interfaces/Library";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import LibraryRequest from "../interfaces/LibraryRequest";
 
-export function getAllLibrariesWithGames(): Promise<Library[]> {
-    return fetch(homeUrl + librariesBaseUrl + "withGames", {
-        method: "GET"
+export function getAllUserLibrariesWithGames(userId: string): Promise<Library[]> {
+    return fetch(homeUrl + librariesBaseUrl + usersBaseUrl + `${userId}` + "/withGames", {
+        method: "GET",
     })
     .then((response) => response.json())
     .catch(err => console.log(err));

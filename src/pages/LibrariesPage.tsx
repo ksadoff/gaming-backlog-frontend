@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as libraryApi from "../api/libraryApi";
+import * as userApi from "../api/userApi";
 import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import Game from "../interfaces/Game";
@@ -7,9 +8,12 @@ import GamePreview from "../interfaces/GamePreview";
 import { homeUiUrl } from "../constants/Routes";
 import CreateLibraryModal from "../components/CreateLibraryModal";
 import LibraryRequest from '../interfaces/LibraryRequest';
+import { useUser } from '../UserContext';
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
+    const { userId } = useUser();
+
     const [userLibraries, setUserLibraries] = useState<Array<LibraryPreview>>([]);
     const [filteredLibraries, setFilteredLibraries] = useState<Array<LibraryPreview>>(userLibraries);
     
@@ -49,7 +53,7 @@ export default function LibrariesPage() {
 
     useEffect(() => {
         const fetchLibraries = async () => {
-            const libraries = await libraryApi.getAllLibrariesWithGames();
+            const libraries = await libraryApi.getAllUserLibrariesWithGames(userId);
             const libraryPreviews = new Array<LibraryPreview>;
             libraries.forEach(library => libraryPreviews.push({ id: library.id, name: library.name, games: gamesToPreviews(library.games) }))
             setUserLibraries(libraryPreviews);

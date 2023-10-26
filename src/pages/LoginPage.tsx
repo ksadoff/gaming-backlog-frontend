@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as userApi from "../api/userApi";
 import { librariesBaseUrl } from '../constants/Routes';
+import { useUser } from '../UserContext';
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { setUserId } = useUser();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +22,7 @@ export default function LoginPage() {
 
   const redirectToUserDefaultLibrary = (userId: string) => {
     // TODO: This will redirect to the user's specific libraries page after GB-60
-    navigate('/' + librariesBaseUrl)
+    navigate('/' + userId + '/' + librariesBaseUrl)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,6 +33,7 @@ export default function LoginPage() {
     setPassword('');
 
     if (authedUser) {
+      setUserId(authedUser.id)
       redirectToUserDefaultLibrary(authedUser.id);
     } else {
       setError("Couldn't log in, try again.")

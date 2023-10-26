@@ -7,15 +7,17 @@ import GameInstancePage from "./pages/GameInstancePage";
 import UserProfilePage from './pages/UserProfilePage';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
+import { UserProvider } from './UserContext';
 
 const App = () => {
     return (
         <BrowserRouter>
+        <UserProvider>
           <Routes>
             {/* For now, home page can be the libraries page */}
             <Route path="/" element={<LibrariesPage/>}></Route>
-            <Route path="/libraries" element={<LibrariesPage/>}></Route>
-            <Route path="/libraries/:id" element={<LibraryPageWrapper/>}></Route>
+            <Route path="/:userId/libraries" element={<LibrariesPage/>}></Route>
+            <Route path="/:userId/libraries/:id" element={<LibraryPageWrapper/>}></Route>
             {/* TODO: Eventually we will need to differentiate between game page and 
             custome game page */}
             <Route path="/games/:id" element={<GamePageWrapper/>}></Route>
@@ -24,6 +26,7 @@ const App = () => {
             <Route  path="/register" element={<RegistrationPage/>}></Route>
             <Route  path="/login" element={<LoginPage/>}></Route>
           </Routes>
+        </UserProvider>
        </BrowserRouter>)
 }
 
