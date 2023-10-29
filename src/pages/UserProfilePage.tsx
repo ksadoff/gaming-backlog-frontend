@@ -40,7 +40,6 @@ export default function UserProfilePage({id}: UserId) {
       }
       else {
           const oldUser = await userApi.getUser(id, true)
-          console.log(oldUser.password)
           if (oldUser.password !== passwordState.oldPassword) {
               alert("Old password is incorrect.")
           }
