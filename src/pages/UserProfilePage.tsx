@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 
 import * as userApi from "../api/userApi";
+import UserRequest from "../interfaces/UserRequest";
 
 interface UserProfile {
   displayName: string;
@@ -11,8 +12,17 @@ interface UserId {
     id: string;
 }
 
+interface PasswordState {
+    oldPassword: string;
+    newPassword: string;
+    verifyPassword: string;
+}
+
 export default function UserProfilePage({id}: UserId) {
     const [userProfile, setUserProfile] = useState<UserProfile>({displayName: "", email: ""});
+    const [passwordState, setPasswordState] = useState<PasswordState>(
+        { oldPassword: "", newPassword: "", verifyPassword: "" }
+    )
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -23,10 +33,35 @@ export default function UserProfilePage({id}: UserId) {
         fetchUser();
     }, []);
 
-  const handlePasswordChange = () => {
-    // TODO: Implement password change functionality
-    console.log('Password change functionality to be implemented.');
+  const handlePasswordChange = async (e: FormEvent) => {
+      e.preventDefault();
+      if (passwordState.newPassword !== passwordState.verifyPassword) {
+          alert("New passwords do not match")
+      }
+      else {
+          const oldUser = await userApi.getUser(id, true)
+          console.log(oldUser.password)
+          if (oldUser.password !== passwordState.oldPassword) {
+              alert("Old password is incorrect.")
+          }
+          else {
+              const newUser: UserRequest = {
+                  displayName: oldUser.displayName,
+                  email: oldUser.email,
+                  password: passwordState.newPassword
+              }
+              await userApi.updateUser(id, newUser)
+              console.log("Password changed.")
+          }
+      }
+      setPasswordState({ oldPassword: "", newPassword: "", verifyPassword: "" })
   };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      const { name, value } = e.target;
+      setPasswordState((prevState) => ({ ...prevState, [name]: value}))
+  }
 
   return (
     <div>
@@ -43,15 +78,39 @@ export default function UserProfilePage({id}: UserId) {
         <h2>Change Password</h2>
         <form onSubmit={handlePasswordChange}>
           <label>
-            Current Password: <input type="password" required />
+            Current Password:
+              <input
+                  id="oldPassword"
+                  name="oldPassword"
+                  type="password"
+                  value={passwordState.oldPassword}
+                  onChange={handleChange}
+                  required
+              />
           </label>
           <br />
           <label>
-            New Password: <input type="password" required />
+            New Password:
+              <input
+                  id="newPassword"
+                  name="newPassword"
+                  type="password"
+                  value={passwordState.newPassword}
+                  onChange={handleChange}
+                  required
+              />
           </label>
           <br />
           <label>
-            Confirm New Password: <input type="password" required />
+            Confirm New Password:
+              <input
+                  id="verifyPassword"
+                  name="verifyPassword"
+                  type="password"
+                  value={passwordState.verifyPassword}
+                  onChange={handleChange}
+                  required
+              />
           </label>
           <br />
           <button type="submit">Change Password</button>

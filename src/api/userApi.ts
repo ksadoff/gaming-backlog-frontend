@@ -3,9 +3,10 @@ import User from "../interfaces/User";
 import UserRequest from "../interfaces/UserRequest";
 import { UserResponse } from "../interfaces/UserResponse";
 
-export function getUser(id: string): Promise<User> {
-    return fetch(homeUrl + usersBaseUrl + `${id}`, {
-        method: "GET"
+export function getUser(id: string, includePassword: boolean = false): Promise<User> {
+    return fetch(homeUrl + usersBaseUrl + `${id}?includePassword=${includePassword}`, {
+        method: "GET",
+        
     })
     .then((response) => response.json())
     .catch(err => console.log(err));
@@ -29,4 +30,14 @@ export function authenticateUser(user: UserRequest): Promise<UserResponse | unde
     })
     .then((response) => response.json())
     .catch(err => console.log(err));
+}
+
+export function updateUser(id: string, user: UserRequest): Promise<UserResponse | undefined> {
+    return fetch(homeUrl + usersBaseUrl + `${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(user),
+        headers: new Headers({'content-type': 'application/json'})
+    })
+        .then((response) => response.json())
+        .catch(err => console.log(err))
 }

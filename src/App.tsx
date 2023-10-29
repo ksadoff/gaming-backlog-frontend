@@ -17,7 +17,7 @@ const App = () => {
             <Route path="/libraries" element={<LibrariesPage/>}></Route>
             <Route path="/libraries/:id" element={<LibraryPageWrapper/>}></Route>
             {/* TODO: Eventually we will need to differentiate between game page and 
-            custome game page */}
+            custom game page */}
             <Route path="/games/:id" element={<GamePageWrapper/>}></Route>
             <Route path="/games/instances/:id" element={<GameInstancePageWrapper/>}></Route>
             <Route path="/users/:id" element={<UserProfilePageWrapper/>}></Route>
