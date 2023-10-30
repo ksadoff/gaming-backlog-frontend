@@ -11,11 +11,13 @@ const mockUser = {
   };
   
 const mockGetUser = jest.spyOn(userApi, 'getUser');
+const mockUpdateUser = jest.spyOn(userApi, "updateUser");
 
 describe('UserProfilePage', () => {
   beforeEach(async () => {
     await act(async () => {
       mockGetUser.mockResolvedValue(mockUser);
+      mockUpdateUser.mockResolvedValue(mockUser);
       render(<UserProfilePage id={"123"}/>);
     });
   });
@@ -30,7 +32,7 @@ describe('UserProfilePage', () => {
     });
 
     describe('when change password is initiated', () => {
-      it('changes password', () => {
+      it('changes password', async () => {
         const currentPasswordInput = screen.getByLabelText(/Current Password:/);
         const newPasswordInput = screen.getAllByLabelText(/New Password:/)[0];
         const confirmNewPasswordInput = screen.getByLabelText(/Confirm New Password:/);
@@ -41,12 +43,32 @@ describe('UserProfilePage', () => {
         expect(confirmNewPasswordInput).toBeInTheDocument();
         expect(changePasswordButton).toBeInTheDocument();
     
-        // TODO: Test actual functionality
-        // Simulate user input
-        // fireEvent.change(currentPasswordInput, { target: { value: 'oldpassword' } });
-        // fireEvent.change(newPasswordInput, { target: { value: 'newpassword' } });
-        // fireEvent.change(confirmNewPasswordInput, { target: { value: 'newpassword' } });
-        // fireEvent.click(changePasswordButton);
+        await act(async () => {
+          fireEvent.change(currentPasswordInput, { target: { value: 'what is security' } });
+          fireEvent.change(newPasswordInput, { target: { value: 'newpassword' } });
+          fireEvent.change(confirmNewPasswordInput, { target: { value: 'newpassword' } });
+          fireEvent.click(changePasswordButton);
+        })
+
+        expect(mockUpdateUser).toHaveBeenCalledWith('123', {
+          displayName: mockUser.displayName,
+          email: mockUser.email,
+          password: 'newpassword',
+        });
+        mockUpdateUser.mockRestore()
+      });
+
+      it('should not change password if new and confirm passwords do not match', async () => {
+        const currentPasswordInput = screen.getByLabelText(/Current Password:/);
+        const newPasswordInput = screen.getAllByLabelText(/New Password:/)[0];
+        const confirmNewPasswordInput = screen.getByLabelText(/Confirm New Password:/);
+        const changePasswordButton = screen.getByRole('button', { name: "Change Password" });
+
+        fireEvent.change(newPasswordInput, { target: { value: 'newPassword' } });
+        fireEvent.change(confirmNewPasswordInput, { target: { value: 'differentPassword' } });
+        fireEvent.click(changePasswordButton);
+
+        expect(mockUpdateUser).not.toHaveBeenCalled();
       });
     });
   });
