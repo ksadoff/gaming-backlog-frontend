@@ -22,5 +22,4 @@ export enum Genres {
     Indie = "Indie",
     CardAndBoardGame = "Card & Board Game",
     MOBA = "MOBA"
-    
 }
