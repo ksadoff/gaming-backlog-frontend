@@ -1,4 +1,4 @@
-enum platforms {
+export enum platforms {
     // Nintendo
     NintendoSwitch = "Nintendo Switch",
     NewNintendo3DS = "New Nintendo 3DS",
