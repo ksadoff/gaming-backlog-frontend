@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as libraryApi from "../api/libraryApi";
 import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
-import Game from "../interfaces/Game";
+import GameInstance from "../interfaces/GameInstance";
 import GamePreview from "../interfaces/GamePreview";
 import { homeUiUrl } from "../constants/Routes";
 import CreateLibraryModal from "../components/CreateLibraryModal";
@@ -41,7 +41,7 @@ export default function LibrariesPage() {
         setUserLibraries(updatedLibraries);
     }
 
-    const gamesToPreviews = (games: Array<Game>) => {
+    const gamesToPreviews = (games: Array<GameInstance>) => {
         const gamePreviews = new Array<GamePreview>();
         games.forEach(game => gamePreviews.push({ id: game.id, name: game.name}));
         return gamePreviews;

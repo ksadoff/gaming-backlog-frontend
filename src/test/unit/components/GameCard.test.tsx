@@ -4,7 +4,7 @@ import selectEvent from 'react-select-event'
 import { GameCard } from '../../../components/GameCard';
 import * as libraryApi from "../../../api/libraryApi";
 import Library from "../../../interfaces/Library";
-import Game from "../../../interfaces/Game"
+import GameInstance from "../../../interfaces/GameInstance"
 
 describe('Rendering Game GameCard', () => {
 
@@ -36,7 +36,7 @@ describe('Rendering Game GameCard', () => {
     createDate: new Date()
   }
 
-  const mockGame: Game = {
+  const mockGame: GameInstance = {
     companies: [""],
     franchises: [""],
     genres: [""],
