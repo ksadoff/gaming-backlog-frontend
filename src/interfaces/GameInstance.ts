@@ -1,4 +1,5 @@
 export default interface GameInstance {
+    id: string;
     name: string; 
     platforms: Array<string>;
     genres: Array<string>;

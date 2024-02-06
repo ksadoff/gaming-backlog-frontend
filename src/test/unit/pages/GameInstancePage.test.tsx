@@ -6,6 +6,7 @@ import GameInstance from "../../../interfaces/GameInstance";
 
 describe('Rendering GameInstancePage', () => {
     let mockGame: GameInstance = {
+        id: "whatever",
         images: ["img"],
         name: "Fire Emblem: Three Houses",
         platforms: ["Nintendo Switch"],

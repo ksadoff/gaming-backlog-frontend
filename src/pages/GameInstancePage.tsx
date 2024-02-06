@@ -12,7 +12,7 @@ interface GameId {
 }
 
 export default function GameInstancePage({gameId}: GameId) {
-    let emptyGame: GameInstance = { name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
+    let emptyGame: GameInstance = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
     const [currentGame, setCurrentGame] = useState<GameInstance>(emptyGame);
 
     useEffect(() => {
