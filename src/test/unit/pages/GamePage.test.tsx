@@ -26,7 +26,7 @@ let setup = async () => {
   })
 }
 
-beforeEach(async() => {
+beforeEach(async () => {
   await setup();
 })
 

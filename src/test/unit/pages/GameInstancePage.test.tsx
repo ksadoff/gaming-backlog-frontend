@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import GameInstancePage  from '../../../pages/GameInstancePage';
 import * as gameApi from '../../../api/gameApi';
 import GameInstance from "../../../interfaces/GameInstance";
@@ -24,89 +24,121 @@ describe('Rendering GameInstancePage', () => {
         platformsOwnedOn: ["Nintendo Switch"]
     }
 
-    let setup = () => {
+    let setup = async () => {
         const mockGetGame = jest.spyOn(gameApi, 'getGameInstance')
         mockGetGame.mockResolvedValue(mockGame)
-        render(<GameInstancePage gameId="test" />);
+        await act(async () => {
+            render(<GameInstancePage gameId="test" />);
+          })
     }
+    
 
-    beforeEach(() => {
-        setup()
+    beforeEach(async () => {
+        await setup()
     })
 
     it('renders game title', async () => {
-        const title = await screen.findByText(/Fire Emblem: Three Houses/);
-        expect(title).toBeInTheDocument();
+        await waitFor(async () => {
+            const title = await screen.findByText(/Fire Emblem: Three Houses/);
+            expect(title).toBeInTheDocument();
+        })
     })
 
     it('renders platforms', async () => {
-        const platform = await screen.findAllByText(/Nintendo Switch/);
-        expect(platform[0]).toBeInTheDocument();
+        await waitFor(async () => {
+            const platform = await screen.findAllByText(/Nintendo Switch/);
+            expect(platform[0]).toBeInTheDocument();
+        })
     })
 
     it('renders genres', async () => {
-        const genre1 = await screen.findByText(/RPG/);
-        expect(genre1).toBeInTheDocument();
+        await waitFor(async () => {
+            const genre1 = await screen.findByText(/RPG/);
+            expect(genre1).toBeInTheDocument();
+        })
     })
 
     it('renders franchises', async () => {
-        const franchise = await screen.findAllByText(/Fire Emblem/);
-        expect(franchise[1]).toBeInTheDocument();
+        await waitFor(async () => {
+            const franchise = await screen.findAllByText(/Fire Emblem/);
+            expect(franchise[1]).toBeInTheDocument();
+        })
     })
 
     it('renders companies', async () => {
-        const company = await screen.findAllByText(/Nintendo/);
-        expect(company[1]).toBeInTheDocument();
+        await waitFor(async () => {
+            const company = await screen.findAllByText(/Nintendo/);
+            expect(company[1]).toBeInTheDocument();
+        })
     })
 
     it('renders release date', async () => {
-        const date = await screen.findByText(/July 26 2019/);
-        expect(date).toBeInTheDocument();
+        await waitFor(async () => {
+            const date = await screen.findByText(/July 26 2019/);
+            expect(date).toBeInTheDocument();
+        })
     })
 
     it('renders summary', async () => {
-        const summary = await screen.findByText(/so many houses/i);
-        expect(summary).toBeInTheDocument();
+        await waitFor(async () => {
+            const summary = await screen.findByText(/so many houses/i);
+            expect(summary).toBeInTheDocument();
+        })
     })
 
     it('renders image', async () => {
-        const image = await screen.findByAltText("Game")
-        expect(image).toBeInTheDocument();
+        await waitFor(async () => {
+            const image = await screen.findByAltText("Game")
+            expect(image).toBeInTheDocument();
+        });
     })
 
     it('renders rating', async () => {
-        const rating = await screen.findByText(/10/)
-        expect(rating).toBeInTheDocument()
+        await waitFor(async () => {
+            const rating = await screen.findByText(/10/)
+            expect(rating).toBeInTheDocument();
+        });
     })
 
     it('renders review', async () => {
-        const review = await screen.findByText(/Blue Lions >>>/)
-        expect(review).toBeInTheDocument()
+        await waitFor(async () => {
+            const review = await screen.findByText(/Blue Lions >>>/)
+            expect(review).toBeInTheDocument();
+        });
     })
 
     it('renders ranking', async () => {
-        const ranking = await screen.findByText(/5/)
-        expect(ranking).toBeInTheDocument()
+        await waitFor(async () => {
+            const ranking = await screen.findByText(/5/)
+            expect(ranking).toBeInTheDocument();
+        });
     })
 
     it('renders yearPlayed', async () => {
-        const yearPlayed = await screen.findAllByText(/2019/)
-        expect(yearPlayed[1]).toBeInTheDocument()
+        await waitFor(async () => {
+            const yearPlayed = await screen.findAllByText(/2019/)
+            expect(yearPlayed[1]).toBeInTheDocument();
+        });
     })
 
     it('renders yearReceived', async () => {
-        const yearReceived = await screen.findAllByText(/2019/)
-        expect(yearReceived[2]).toBeInTheDocument()
+        await waitFor(async () => {
+            const yearReceived = await screen.findAllByText(/2019/)
+            expect(yearReceived[2]).toBeInTheDocument();
+        });
     })
 
     it('renders notes', async () => {
-        const notes = await screen.findByText(/i want to replay this game for a fifth time please stop me/)
-        expect(notes).toBeInTheDocument()
+        await waitFor(async () => {
+            const notes = await screen.findByText(/i want to replay this game for a fifth time please stop me/)
+            expect(notes).toBeInTheDocument();
+        });
     })
 
     it('renders platformsOwnedOn', async () => {
-        const platform = await screen.findAllByText(/Nintendo Switch/);
-        expect(platform[1]).toBeInTheDocument();
+        await waitFor(async () => {
+            const platform = await screen.findAllByText(/Nintendo Switch/);
+            expect(platform[1]).toBeInTheDocument();
+        });
     })
-
 });
