@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import GamePage  from '../../../pages/GamePage';
 import Game from '../../../interfaces/Game';
 import * as gameApi from '../../../api/gameApi';
@@ -23,8 +23,10 @@ let setup = () => {
   render(<GamePage gameId="test" />);
 }
 
-beforeEach(() => {
-  setup()
+beforeEach(async() => {
+  act(() => {
+    setup();
+  })
 })
 
   it('renders game title', async () => {
