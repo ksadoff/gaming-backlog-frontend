@@ -33,6 +33,7 @@ export default function CreateLibraryModal({ isOpen, onClose, onSubmit }: Create
         onRequestClose={onClose}
         contentLabel="CreateLibraryModal"
         style={customStyles}
+        ariaHideApp={false}
         >
             <h2>Create New Library</h2>
             <div>Enter your library name here</div>
