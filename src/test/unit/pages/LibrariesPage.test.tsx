@@ -6,7 +6,7 @@ import LibraryRequest from '../../../interfaces/LibraryRequest';
 const getLibrariesStub = jest.spyOn(libraryApi, 'getAllLibrariesWithGames');
 const createLibraryStub = jest.spyOn(libraryApi, 'createLibrary');
 
-let setup = () => {
+let setup = async () => {
   getLibrariesStub.mockResolvedValue([{id: "123",
     name: "Want to Play",
     games: [{
@@ -34,14 +34,30 @@ let setup = () => {
         images: ["kirby.png"]}],
     createDate: new Date()}])
 
-    act(() => {
+    createLibraryStub.mockResolvedValue({
+      id: "789",
+      name: "Finished",
+      games: [{
+        id: "1",
+        name: "Pokémon Violet",
+        platforms: ["Nintendo Switch"],
+        genres: ["RPG"],
+        franchises: ["Pokémon"],
+        companies: ["Game Freak"],
+        releaseDate: ["2022-11-18"],
+        summary: "I could really go for a sandwich.",
+        images: ["pv.png"]}],
+      createDate: new Date()
+    })
+
+    await act(async () => {
       render(<LibrariesPage />)
   });
 };
 
 describe('Rendering LibrariesPage', () => {
   beforeEach(async () => {
-    setup()
+    await setup()
     await waitFor(() => {
       const title = screen.getByText(/Want to Play/i)
       expect(title).toBeInTheDocument();
@@ -129,8 +145,13 @@ describe('Rendering LibrariesPage', () => {
   });
 
   describe('when you click on the create library button', () => {
-    beforeEach(() => {
-      fireEvent.click(screen.getByText("Create Library"));
+    beforeEach(async () => {
+      await act(async () => {
+        fireEvent.click(screen.getByText("Create Library"));
+      })
+      await waitFor(() => {
+        expect(screen.getByText("Enter your library name here")).toBeInTheDocument();
+      });
     });
 
     it('the modal appears', () => {
@@ -138,13 +159,15 @@ describe('Rendering LibrariesPage', () => {
     });
 
     describe('and when we submit a new library', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         const input = screen.getByTestId("libraryName");
-        fireEvent.change(input, { target: { value: "New Library" } });
-        fireEvent.click(screen.getByText("submit"));
-      });
+        await act(async () => {
+          fireEvent.change(input, { target: { value: "New Library" } });
+          fireEvent.click(screen.getByText("submit"));
+        })
+      })
 
-      it('calls the create library api', () => {
+      it('calls the create library api', async () => {
         const libraryToCreate: LibraryRequest = {
           name: "New Library",
           games: [],
