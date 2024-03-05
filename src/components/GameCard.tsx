@@ -35,7 +35,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
     const [selectedLibrary, setSelectedLibrary] = useState("")
 
     const fetchAllLibraries = async () => {
-        const libraries = await libraryApi.getAllLibraries()
+        const libraries = await libraryApi.getAllLibrariesWithGames()
         const libraryOptions = new Array<LibraryOption>()
         libraries.forEach((library) => {
             libraryOptions.push({ label: library.name, value: library.id })
