@@ -150,18 +150,24 @@ describe('Rendering Game GameCard', () => {
     expect(library4.games.length).toEqual(0)
   })
 
-  // it("should select one library, then another, and add to the second library", async () => {
-  //   await selectEvent.select(screen.getByText(/Select a Library/), "Wishlist")
-  //   await selectEvent.select(screen.getByText(/Wishlist/), "Games Under 5 Hours")
-  //   fireEvent(
-  //       screen.getByText('Add to Library'),
-  //       new MouseEvent('click', {
-  //         bubbles: true,
-  //         cancelable: true,
-  //       }),
-  //   )
-  //   expect(library3.games.length).toEqual(0)
-  //   expect(library4.games.length).toEqual(1)
-  //   expect(library4.games[0].id).toEqual("testID")
-  // })
+  it("should select one library, then another, and add to the second library", async () => {
+    await act(async () => {
+      selectEvent.select(screen.getByText(/Select a Library/), "Wishlist")
+    });
+    await act(async () => {
+      selectEvent.select(screen.getByText(/Wishlist/), "Games Under 5 Hours")
+    })
+    await act (async () => {
+      fireEvent(
+        screen.getByText('Add to Library'),
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        }),
+      )
+    })
+    expect(library3.games.length).toEqual(0)
+    expect(library4.games.length).toEqual(1)
+    expect(library4.games[0].id).toEqual("testID")
+  })
 });
