@@ -35,7 +35,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
     const [selectedLibrary, setSelectedLibrary] = useState("")
 
     const fetchAllLibraries = async () => {
-        const libraries = await libraryApi.getAllLibraries()
+        const libraries = await libraryApi.getAllLibrariesWithGames()
         const libraryOptions = new Array<LibraryOption>()
         libraries.forEach((library) => {
             libraryOptions.push({ label: library.name, value: library.id })
@@ -62,29 +62,29 @@ export function GameCard(gameCardProps : GameCardProps ) {
             <p>{gameCardProps.gameSummary}</p>
             <div>
                 {(gameCardProps.gamePlatforms.map((platform) => {
-                    return <p>{platform}</p>
+                    return <p key={platform}>{platform}</p>
                 }))}
             </div>
             <div>
                 {(gameCardProps.gameGenres.map((genre) => {
-                    return <p>{genre}</p>
+                    return <p key={genre}>{genre}</p>
                 }))}
             </div>
             <div>
                 { gameCardProps.gameFranchises ?
                 (gameCardProps.gameFranchises.map((franchise) => {
-                    return <p>{franchise}</p>
+                    return <p key={franchise}>{franchise}</p>
                 }))
                  : null }
             </div>
             <div>
                 {(gameCardProps.gameCompanies.map((company) => {
-                    return <p>{company}</p>
+                    return <p key={company}>{company}</p>
                 }))}
             </div>
             <div>
                 {(gameCardProps.gameReleaseDate.map((date) => {
-                    return <p>{date}</p>
+                    return <p key={date}>{date}</p>
                 }))}
             </div>
             <p>{gameCardProps?.gameRating}</p>
@@ -95,7 +95,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
             <p>{gameCardProps?.notes}</p>
             <div>
                 {(gameCardProps.platformsOwnedOn?.map((platform) => {
-                    return <p>{platform}</p>
+                    return <p key={platform}>{platform}</p>
                 }))}
             </div>
             <p>{gameCardProps?.dateAdded?.toDateString()}</p>

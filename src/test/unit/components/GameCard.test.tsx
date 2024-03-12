@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {fireEvent, render, screen, act, waitFor} from '@testing-library/react';
 import selectEvent from 'react-select-event'
 import { GameCard } from '../../../components/GameCard';
 import * as libraryApi from "../../../api/libraryApi";
@@ -7,8 +7,8 @@ import Library from "../../../interfaces/Library";
 import GameInstance from "../../../interfaces/GameInstance"
 
 describe('Rendering Game GameCard', () => {
-
-  const allLibrariesStub = jest.spyOn(libraryApi, 'getAllLibraries')
+  const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
+  const allLibrariesStub = jest.spyOn(libraryApi, 'getAllLibrariesWithGames')
   const addToLibraryStub = jest.spyOn(libraryApi, 'addToLibrary')
 
   const library1: Library = {
@@ -50,7 +50,7 @@ describe('Rendering Game GameCard', () => {
 
   let getMockLibraries = () => [library1, library2, library3, library4]
 
-  let setup = () => {
+  let setup = async () => {
     allLibrariesStub.mockResolvedValue(getMockLibraries())
     addToLibraryStub.mockImplementation((gameId: string, libraryId: string): Promise<any> => {
       mockGame.id = gameId
@@ -58,7 +58,8 @@ describe('Rendering Game GameCard', () => {
       getMockLibraries()[libraryInd].games.push(mockGame)
       return Promise.resolve()
     })
-    render(
+    await act(async () => {
+      render(
         <GameCard
             gameId = "testID"
             gameName='Dragon Age: Inquisition'
@@ -70,6 +71,7 @@ describe('Rendering Game GameCard', () => {
             gameCompanies={["BioWare"]}
             gameReleaseDate={["Nov 03, 2009"]}
         />);
+      });
   }
 
   let tearDown = () => {
@@ -80,7 +82,7 @@ describe('Rendering Game GameCard', () => {
   }
 
   beforeEach(async () => {
-    setup()
+    await setup()
   })
 
   afterEach(() => {
@@ -114,26 +116,33 @@ describe('Rendering Game GameCard', () => {
   })
 
   it('should add game to library after clicking library', async () => {
-    await selectEvent.select(screen.getByText(/Select a Library/), "Want to Play")
-    fireEvent(
+    await act(async () => {
+      selectEvent.select(screen.getByText(/Select a Library/), "Want to Play")
+    }) 
+    await act(async () => {
+      fireEvent(
         screen.getByText('Add to Library'),
         new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
         }),
-    )
+      )
+    })
+    
     expect(library1.games.length).toEqual(1)
     expect(library1.games[0].id).toEqual("testID")
   })
 
   it('should not add to library with no games selected', async () => {
-    fireEvent(
+    await act(async () => {
+      fireEvent(
         screen.getByText('Add to Library'),
         new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
         }),
-    )
+      )
+    })
     expect(addToLibraryStub).not.toHaveBeenCalled()
     expect(library1.games.length).toEqual(0)
     expect(library2.games.length).toEqual(0)
@@ -142,15 +151,21 @@ describe('Rendering Game GameCard', () => {
   })
 
   it("should select one library, then another, and add to the second library", async () => {
-    await selectEvent.select(screen.getByText(/Select a Library/), "Wishlist")
-    await selectEvent.select(screen.getByText(/Wishlist/), "Games Under 5 Hours")
-    fireEvent(
+    await act(async () => {
+      selectEvent.select(screen.getByText(/Select a Library/), "Wishlist")
+    });
+    await act(async () => {
+      selectEvent.select(screen.getByText(/Wishlist/), "Games Under 5 Hours")
+    })
+    await act (async () => {
+      fireEvent(
         screen.getByText('Add to Library'),
         new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
         }),
-    )
+      )
+    })
     expect(library3.games.length).toEqual(0)
     expect(library4.games.length).toEqual(1)
     expect(library4.games[0].id).toEqual("testID")
