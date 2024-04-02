@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Route, BrowserRouter, Routes, useParams } from "react-router-dom";
 import LibrariesPage from "./pages/LibrariesPage";
 import LibraryPage from "./pages/LibraryPage";

@@ -2,7 +2,7 @@ import { act, render, screen, fireEvent } from "@testing-library/react";
 import UserProfilePage from "../../../pages/UserProfilePage";
 import * as userApi from "../../../api/userApi";
 
-const alertSpy = jest.spyOn(window, "alert").mockImplementation(() => {});
+jest.spyOn(window, "alert").mockImplementation(() => {});
 const mockUser = {
   id: "123",
   displayName: "Mock User",
@@ -70,7 +70,6 @@ describe("UserProfilePage", () => {
       });
 
       it("should not change password if new and confirm passwords do not match", async () => {
-        const currentPasswordInput = screen.getByLabelText(/Current Password:/);
         const newPasswordInput = screen.getAllByLabelText(/New Password:/)[0];
         const confirmNewPasswordInput = screen.getByLabelText(
           /Confirm New Password:/,

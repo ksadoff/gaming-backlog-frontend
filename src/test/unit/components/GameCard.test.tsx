@@ -1,10 +1,8 @@
-import React from "react";
 import {
   fireEvent,
   render,
   screen,
   act,
-  waitFor,
 } from "@testing-library/react";
 import selectEvent from "react-select-event";
 import { GameCard } from "../../../components/GameCard";
@@ -13,7 +11,7 @@ import Library from "../../../interfaces/Library";
 import GameInstance from "../../../interfaces/GameInstance";
 
 describe("Rendering Game GameCard", () => {
-  const alertSpy = jest.spyOn(window, "alert").mockImplementation(() => {});
+  jest.spyOn(window, "alert").mockImplementation(() => {});
   const allLibrariesStub = jest.spyOn(libraryApi, "getAllLibrariesWithGames");
   const addToLibraryStub = jest.spyOn(libraryApi, "addToLibrary");
 
@@ -54,12 +52,12 @@ describe("Rendering Game GameCard", () => {
     id: "",
   };
 
-  let getMockLibraries = () => [library1, library2, library3, library4];
+  const getMockLibraries = () => [library1, library2, library3, library4];
 
-  let setup = async () => {
+  const setup = async () => {
     allLibrariesStub.mockResolvedValue(getMockLibraries());
     addToLibraryStub.mockImplementation(
-      (gameId: string, libraryId: string): Promise<any> => {
+      (gameId: string, libraryId: string) => {
         mockGame.id = gameId;
         const libraryInd = +libraryId - 1;
         getMockLibraries()[libraryInd].games.push(mockGame);
@@ -85,7 +83,7 @@ describe("Rendering Game GameCard", () => {
     });
   };
 
-  let tearDown = () => {
+  const tearDown = () => {
     library1.games = [];
     library2.games = [];
     library3.games = [];

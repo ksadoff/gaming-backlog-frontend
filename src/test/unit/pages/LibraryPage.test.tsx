@@ -4,10 +4,10 @@ import LibraryPage from "../../../pages/LibraryPage";
 import * as libraryApi from "../../../api/libraryApi";
 
 const libraryStub = jest.spyOn(libraryApi, "getLibraryWithGames");
-const alertSpy = jest.spyOn(window, "alert").mockImplementation(() => {});
+jest.spyOn(window, "alert").mockImplementation(() => {});
 
 describe("Rendering LibraryPage", () => {
-  let setup = async () => {
+  const setup = async () => {
     await act(async () => {
       libraryStub.mockResolvedValue({
         id: "123",

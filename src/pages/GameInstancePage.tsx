@@ -12,7 +12,7 @@ interface GameId {
 }
 
 export default function GameInstancePage({ gameId }: GameId) {
-  let emptyGame: GameInstance = {
+  const emptyGame: GameInstance = {
     id: "",
     name: "",
     platforms: [],

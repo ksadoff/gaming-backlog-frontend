@@ -8,7 +8,7 @@ interface GamePageProps {
 }
 
 export default function GamePage({ gameId }: GamePageProps) {
-  let emptyGame: Game = {
+  const emptyGame: Game = {
     id: "",
     name: "",
     platforms: [],

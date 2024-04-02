@@ -15,8 +15,8 @@ const customStyles = {
 
 interface CreateLibraryModalProps {
   isOpen: boolean;
-  onClose: any;
-  onSubmit: any;
+  onClose: () => void;
+  onSubmit: (libraryName: string) => void;
 }
 
 export default function CreateLibraryModal({
