@@ -21,3 +21,7 @@ export const getGameInstance = async (id: string): Promise<GameInstance> => {
   });
   return await response.json();
 };
+
+export const fakeMethod = () => {
+  console.log('just testing');
+}
