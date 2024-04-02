@@ -8,106 +8,116 @@ import GameInstance from "../interfaces/GameInstance";
 import * as gameApi from "../api/gameApi";
 
 interface GameId {
-    gameId: string
+  gameId: string;
 }
 
-export default function GameInstancePage({gameId}: GameId) {
-    let emptyGame: GameInstance = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
-    const [currentGame, setCurrentGame] = useState<GameInstance>(emptyGame);
+export default function GameInstancePage({ gameId }: GameId) {
+  let emptyGame: GameInstance = {
+    id: "",
+    name: "",
+    platforms: [],
+    genres: [],
+    franchises: [],
+    companies: [],
+    releaseDate: [],
+    summary: "",
+    images: [],
+  };
+  const [currentGame, setCurrentGame] = useState<GameInstance>(emptyGame);
 
-    useEffect(() => {
-        const fetchGame = async () => {
-            const currentGame : GameInstance = await gameApi.getGameInstance(gameId);
-            setCurrentGame(currentGame);
-        }
+  useEffect(() => {
+    const fetchGame = async () => {
+      const currentGame: GameInstance = await gameApi.getGameInstance(gameId);
+      setCurrentGame(currentGame);
+    };
 
-        fetchGame();
-    }, [gameId])
+    fetchGame();
+  }, [gameId]);
 
-    const getName = () => {
-        return currentGame?.name || ""
-    }
+  const getName = () => {
+    return currentGame?.name || "";
+  };
 
-    const getImage = () => {
-        return currentGame?.images || [];
-    }
+  const getImage = () => {
+    return currentGame?.images || [];
+  };
 
-    const getSummary = () => {
-        return currentGame?.summary || "";
-    }
+  const getSummary = () => {
+    return currentGame?.summary || "";
+  };
 
-    const getPlatforms = () => {
-        return currentGame?.platforms || []
-    }
+  const getPlatforms = () => {
+    return currentGame?.platforms || [];
+  };
 
-    const getGenres = () => {
-        return currentGame?.genres || []
-    }
+  const getGenres = () => {
+    return currentGame?.genres || [];
+  };
 
-    const getFranchises = () => {
-        return currentGame?.franchises || []
-    }
+  const getFranchises = () => {
+    return currentGame?.franchises || [];
+  };
 
-    const getCompanies = () => {
-        return currentGame?.companies || []
-    }
-    
-    const getReleaseDate = () => {
-        return currentGame?.releaseDate || []
-    }
+  const getCompanies = () => {
+    return currentGame?.companies || [];
+  };
 
-    const getGameRating = () => {
-        return currentGame?.rating || 0
-    }
+  const getReleaseDate = () => {
+    return currentGame?.releaseDate || [];
+  };
 
-    const getGameReview = () => {
-        return currentGame?.review || ""
-    }
+  const getGameRating = () => {
+    return currentGame?.rating || 0;
+  };
 
-    const getGameRanking = () => {
-        return currentGame?.ranking || ""
-    }
+  const getGameReview = () => {
+    return currentGame?.review || "";
+  };
 
-    const getYearPlayed = () => {
-        return currentGame?.yearPlayed || 0
-    }
+  const getGameRanking = () => {
+    return currentGame?.ranking || "";
+  };
 
-    const getYearReceived = () => {
-        return currentGame?.yearReceived || 0
-    }
+  const getYearPlayed = () => {
+    return currentGame?.yearPlayed || 0;
+  };
 
-    const getNotes = () => {
-        return currentGame?.notes || ""
-    }
+  const getYearReceived = () => {
+    return currentGame?.yearReceived || 0;
+  };
 
-    const getPlatformsOwnedOn = () => {
-        return currentGame?.platformsOwnedOn || []
-    }
+  const getNotes = () => {
+    return currentGame?.notes || "";
+  };
 
-    const getDateAdded = () => {
-        return currentGame?.dateAdded || undefined
-    }
+  const getPlatformsOwnedOn = () => {
+    return currentGame?.platformsOwnedOn || [];
+  };
 
-    return (
+  const getDateAdded = () => {
+    return currentGame?.dateAdded || undefined;
+  };
+
+  return (
     // We'll want a page header at some point
     <GameCard
-        gameId={gameId}
-        gameName = {getName()}
-        gameImage = {getImage()}
-        gameSummary = {getSummary()}
-        gamePlatforms = {getPlatforms()}
-        gameGenres = {getGenres()}
-        gameFranchises = {getFranchises()}
-        gameCompanies = {getCompanies()}
-        gameReleaseDate = {getReleaseDate()}
-        gameRating = {getGameRating()}
-        gameReview = {getGameReview()}
-        gameRanking = {getGameRanking()}
-        yearPlayed = {getYearPlayed()}
-        yearReceived = {getYearReceived()}
-        notes = {getNotes()}
-        platformsOwnedOn = {getPlatformsOwnedOn()}
-        dateAdded ={getDateAdded()}
+      gameId={gameId}
+      gameName={getName()}
+      gameImage={getImage()}
+      gameSummary={getSummary()}
+      gamePlatforms={getPlatforms()}
+      gameGenres={getGenres()}
+      gameFranchises={getFranchises()}
+      gameCompanies={getCompanies()}
+      gameReleaseDate={getReleaseDate()}
+      gameRating={getGameRating()}
+      gameReview={getGameReview()}
+      gameRanking={getGameRanking()}
+      yearPlayed={getYearPlayed()}
+      yearReceived={getYearReceived()}
+      notes={getNotes()}
+      platformsOwnedOn={getPlatformsOwnedOn()}
+      dateAdded={getDateAdded()}
     />
-    )
+  );
 }

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as userApi from "../api/userApi";
-import { librariesBaseUrl } from '../constants/Routes';
+import { librariesBaseUrl } from "../constants/Routes";
 
 export default function LoginPage() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -20,20 +20,20 @@ export default function LoginPage() {
 
   const redirectToUserDefaultLibrary = (userId: string) => {
     // TODO: This will redirect to the user's specific libraries page after GB-60
-    navigate('/' + librariesBaseUrl)
-  }
+    navigate("/" + librariesBaseUrl);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const authedUser = await userApi.authenticateUser({ email, password });
     // Reset the form fields
-    setEmail('');
-    setPassword('');
+    setEmail("");
+    setPassword("");
 
     if (authedUser) {
       redirectToUserDefaultLibrary(authedUser.id);
     } else {
-      setError("Couldn't log in, try again.")
+      setError("Couldn't log in, try again.");
     }
   };
 

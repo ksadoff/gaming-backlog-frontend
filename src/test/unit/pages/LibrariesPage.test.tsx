@@ -1,43 +1,63 @@
-import { render, screen, act, waitFor, fireEvent } from '@testing-library/react';
-import LibrariesPage from '../../../pages/LibrariesPage';
+import {
+  render,
+  screen,
+  act,
+  waitFor,
+  fireEvent,
+} from "@testing-library/react";
+import LibrariesPage from "../../../pages/LibrariesPage";
 import * as libraryApi from "../../../api/libraryApi";
-import LibraryRequest from '../../../interfaces/LibraryRequest';
+import LibraryRequest from "../../../interfaces/LibraryRequest";
 
-const getLibrariesStub = jest.spyOn(libraryApi, 'getAllLibrariesWithGames');
-const createLibraryStub = jest.spyOn(libraryApi, 'createLibrary');
+const getLibrariesStub = jest.spyOn(libraryApi, "getAllLibrariesWithGames");
+const createLibraryStub = jest.spyOn(libraryApi, "createLibrary");
 
 let setup = async () => {
-  getLibrariesStub.mockResolvedValue([{id: "123",
-    name: "Want to Play",
-    games: [{
-        id: "1",
-        name: "Disco Elysium",
-        platforms: ["PC"],
-        genres: ["RPG"],
-        franchises: [],
-        companies: ["ZA/UM"],
-        releaseDate: ["2019-10-15"],
-        summary: "Kim Kitsuragi is the character ever.",
-        images: ["de.png"]}],
-    createDate: new Date()},
-    {id: "456",
-    name: "Finished",
-    games: [{
-        id: "2",
-        name: "Kirby and the Forgotten Land",
-        platforms: ["Nintendo Switch"],
-        genres: ["Platform"],
-        franchises: ["Kirby"],
-        companies: ["Nintendo"],
-        releaseDate: ["2022-03-25"],
-        summary: "Just forget about the eldritch horrors and look at the pink blob!",
-        images: ["kirby.png"]}],
-    createDate: new Date()}])
-
-    createLibraryStub.mockResolvedValue({
-      id: "789",
+  getLibrariesStub.mockResolvedValue([
+    {
+      id: "123",
+      name: "Want to Play",
+      games: [
+        {
+          id: "1",
+          name: "Disco Elysium",
+          platforms: ["PC"],
+          genres: ["RPG"],
+          franchises: [],
+          companies: ["ZA/UM"],
+          releaseDate: ["2019-10-15"],
+          summary: "Kim Kitsuragi is the character ever.",
+          images: ["de.png"],
+        },
+      ],
+      createDate: new Date(),
+    },
+    {
+      id: "456",
       name: "Finished",
-      games: [{
+      games: [
+        {
+          id: "2",
+          name: "Kirby and the Forgotten Land",
+          platforms: ["Nintendo Switch"],
+          genres: ["Platform"],
+          franchises: ["Kirby"],
+          companies: ["Nintendo"],
+          releaseDate: ["2022-03-25"],
+          summary:
+            "Just forget about the eldritch horrors and look at the pink blob!",
+          images: ["kirby.png"],
+        },
+      ],
+      createDate: new Date(),
+    },
+  ]);
+
+  createLibraryStub.mockResolvedValue({
+    id: "789",
+    name: "Finished",
+    games: [
+      {
         id: "1",
         name: "Pokémon Violet",
         platforms: ["Nintendo Switch"],
@@ -46,73 +66,78 @@ let setup = async () => {
         companies: ["Game Freak"],
         releaseDate: ["2022-11-18"],
         summary: "I could really go for a sandwich.",
-        images: ["pv.png"]}],
-      createDate: new Date()
-    })
+        images: ["pv.png"],
+      },
+    ],
+    createDate: new Date(),
+  });
 
-    await act(async () => {
-      render(<LibrariesPage />)
+  await act(async () => {
+    render(<LibrariesPage />);
   });
 };
 
-describe('Rendering LibrariesPage', () => {
+describe("Rendering LibrariesPage", () => {
   beforeEach(async () => {
-    await setup()
+    await setup();
     await waitFor(() => {
-      const title = screen.getByText(/Want to Play/i)
+      const title = screen.getByText(/Want to Play/i);
       expect(title).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: "Want to Play"})).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: "Finished"})).toBeInTheDocument();
-      });
+      expect(
+        screen.getByRole("link", { name: "Want to Play" }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("link", { name: "Finished" }),
+      ).toBeInTheDocument();
+    });
   });
 
-  it('renders page title', () => {
+  it("renders page title", () => {
     const title = screen.getByText(/Libraries/i);
     expect(title).toBeInTheDocument();
   });
 
-  it('renders data', async () => {
-      const game1 = screen.getByText(/Disco Elysium/i);
-      expect(game1).toBeInTheDocument();
-      const game2 = screen.getByText(/Kirby and the Forgotten Land/i);
-      expect(game2).toBeInTheDocument();
-    });
+  it("renders data", async () => {
+    const game1 = screen.getByText(/Disco Elysium/i);
+    expect(game1).toBeInTheDocument();
+    const game2 = screen.getByText(/Kirby and the Forgotten Land/i);
+    expect(game2).toBeInTheDocument();
+  });
 
-  it('renders create new library button', () => {
+  it("renders create new library button", () => {
     expect(screen.getByText("Create Library"));
   });
 
-  it('renders sort button', () => {
+  it("renders sort button", () => {
     expect(screen.getByText("Sort Ascending"));
   });
 
-  it('renders search input', () => {
+  it("renders search input", () => {
     expect(screen.getByTestId("search"));
   });
 
-  describe('when you click on the sort button', () => {
+  describe("when you click on the sort button", () => {
     beforeEach(() => {
-      fireEvent.click(screen.getByText(/Sort Ascending/i
-      ));
+      fireEvent.click(screen.getByText(/Sort Ascending/i));
     });
 
-    it('sorts the libraries in alphabetical order', () => {
+    it("sorts the libraries in alphabetical order", () => {
       const wantToPlay = screen.getByText(/Want to Play/i);
       const finished = screen.getByText(/Finished/i);
       expect(wantToPlay.compareDocumentPosition(finished)).toBe(2);
     });
 
-    it('the sort button changes text', () => {
+    it("the sort button changes text", () => {
       expect(screen.getByText(/Sort Descending/i)).toBeInTheDocument();
       expect(screen.queryByText(/Sort Ascending/i)).not.toBeInTheDocument();
     });
 
-    describe('and when you click again on the sort button', () => {
+    describe("and when you click again on the sort button", () => {
       beforeEach(() => {
         fireEvent.click(screen.getByText("Sort Descending"));
       });
 
-      it('sorts the libraries in reverse alphabetical order', () => {
+      it("sorts the libraries in reverse alphabetical order", () => {
         const wantToPlay = screen.getByText(/Want to Play/i);
         const finished = screen.getByText(/Finished/i);
         expect(finished.compareDocumentPosition(wantToPlay)).toBe(2);
@@ -120,58 +145,60 @@ describe('Rendering LibrariesPage', () => {
     });
   });
 
-  describe('when you enter a search term', () => {
+  describe("when you enter a search term", () => {
     beforeEach(() => {
       const input = screen.getByTestId("search");
       fireEvent.change(input, { target: { value: "want" } });
     });
 
-    it('renders only the matching libraries', () => {
+    it("renders only the matching libraries", () => {
       expect(screen.getByText(/Want to Play/i)).toBeInTheDocument();
       expect(screen.queryByText(/Finished/i)).not.toBeInTheDocument();
     });
 
-    describe('and when the search term is deleted', () => {
+    describe("and when the search term is deleted", () => {
       beforeEach(() => {
         const input = screen.getByTestId("search");
         fireEvent.change(input, { target: { value: "" } });
       });
 
-      it('renders all the libraries', () => {
+      it("renders all the libraries", () => {
         expect(screen.getByText(/Want to Play/i)).toBeInTheDocument();
         expect(screen.getByText(/Finished/i)).toBeInTheDocument();
       });
     });
   });
 
-  describe('when you click on the create library button', () => {
+  describe("when you click on the create library button", () => {
     beforeEach(async () => {
       await act(async () => {
         fireEvent.click(screen.getByText("Create Library"));
-      })
+      });
       await waitFor(() => {
-        expect(screen.getByText("Enter your library name here")).toBeInTheDocument();
+        expect(
+          screen.getByText("Enter your library name here"),
+        ).toBeInTheDocument();
       });
     });
 
-    it('the modal appears', () => {
+    it("the modal appears", () => {
       expect(screen.getByText("Enter your library name here"));
     });
 
-    describe('and when we submit a new library', () => {
+    describe("and when we submit a new library", () => {
       beforeEach(async () => {
         const input = screen.getByTestId("libraryName");
         await act(async () => {
           fireEvent.change(input, { target: { value: "New Library" } });
           fireEvent.click(screen.getByText("submit"));
-        })
-      })
+        });
+      });
 
-      it('calls the create library api', async () => {
+      it("calls the create library api", async () => {
         const libraryToCreate: LibraryRequest = {
           name: "New Library",
           games: [],
-      };
+        };
         expect(createLibraryStub).toHaveBeenCalledWith(libraryToCreate);
       });
     });

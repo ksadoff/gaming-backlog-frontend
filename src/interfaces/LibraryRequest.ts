@@ -1,6 +1,6 @@
 import GameInstance from "./GameInstance";
 
 export default interface LibraryRequest {
-    name: string;
-    games?: Array<GameInstance>;
+  name: string;
+  games?: Array<GameInstance>;
 }
