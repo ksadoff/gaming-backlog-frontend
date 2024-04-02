@@ -22,6 +22,10 @@ export const getGameInstance = async (id: string): Promise<GameInstance> => {
   return await response.json();
 };
 
-export const fakeMethod = () => {
-  console.log('just testing');
+console.log('one');
+var ww = process.env.NODE_ENV.trim.toLowerCase();
+if (ww === 'production') {
+  console.log('Another one');
+} else {
+  console.log('test');
 }
