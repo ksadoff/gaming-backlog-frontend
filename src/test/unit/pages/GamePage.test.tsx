@@ -5,7 +5,7 @@ import Game from '../../../interfaces/Game';
 import * as gameApi from '../../../api/gameApi';
 
 describe('Rendering GamePage', () => {
-  let mockGame: Game = {
+  const mockGame: Game = {
     id: "18327",
     name: "The Legend of Zelda: Tears of the Kingdom", 
     platforms: ["Nintendo Switch"],
@@ -17,7 +17,7 @@ describe('Rendering GamePage', () => {
     images: ["img"]
 }
 
-let setup = async () => {
+const setup = async () => {
   const mockGetGame = jest.spyOn(gameApi, 'getGame')
   mockGetGame.mockResolvedValue(mockGame)
 

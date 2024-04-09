@@ -5,7 +5,7 @@ import * as gameApi from '../../../api/gameApi';
 import GameInstance from "../../../interfaces/GameInstance";
 
 describe('Rendering GameInstancePage', () => {
-    let mockGame: GameInstance = {
+    const mockGame: GameInstance = {
         id: "whatever",
         images: ["img"],
         name: "Fire Emblem: Three Houses",
@@ -24,7 +24,7 @@ describe('Rendering GameInstancePage', () => {
         platformsOwnedOn: ["Nintendo Switch"]
     }
 
-    let setup = async () => {
+    const setup = async () => {
         const mockGetGame = jest.spyOn(gameApi, 'getGameInstance')
         mockGetGame.mockResolvedValue(mockGame)
         await act(async () => {

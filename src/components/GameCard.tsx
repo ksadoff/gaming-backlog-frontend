@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import { useState} from "react";
 import Select from 'react-select'
 
 // components
@@ -8,7 +8,7 @@ import * as libraryApi from "../api/libraryApi";
 interface GameCardProps {
     gameId: string;
     gameName: string;
-    gameImage: any;
+    gameImage: Array<string>;
     gameSummary: string;
     gamePlatforms: Array<string>;
     gameGenres: Array<string>;
@@ -104,7 +104,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
                     placeholder="Select a Library"
                     options={libraryOptions}
                     onMenuOpen={() => fetchAllLibraries()}
-                    onChange={(library) => setSelectedLibrary(library!!.value)}
+                    onChange={(library) => setSelectedLibrary(library!.value)}
                 />
                 <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}/>
             </div>
