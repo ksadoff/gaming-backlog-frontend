@@ -18,7 +18,6 @@ export default function LoginPage() {
     setPassword(e.target.value);
   };
 
-  // TODO: remove this ignore when we add usage for the userId
   const redirectToUserDefaultLibrary = () => {
     // TODO: This will redirect to the user's specific libraries page after GB-60
     navigate('/' + librariesBaseUrl)
