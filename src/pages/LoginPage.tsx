@@ -18,7 +18,7 @@ export default function LoginPage() {
     setPassword(e.target.value);
   };
 
-  const redirectToUserDefaultLibrary = (userId: string) => {
+  const redirectToUserDefaultLibrary = () => {
     // TODO: This will redirect to the user's specific libraries page after GB-60
     navigate('/' + librariesBaseUrl)
   }
@@ -31,7 +31,7 @@ export default function LoginPage() {
     setPassword('');
 
     if (authedUser) {
-      redirectToUserDefaultLibrary(authedUser.id);
+      redirectToUserDefaultLibrary();
     } else {
       setError("Couldn't log in, try again.")
     }

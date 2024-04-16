@@ -8,7 +8,7 @@ interface GamePageProps {
 }
 
 export default function GamePage({ gameId }: GamePageProps) {
-    let emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
+    const emptyGame: Game = { id: "", name: "", platforms: [], genres: [], franchises: [], companies: [], releaseDate: [], summary: "", images: []}
     const [currentGame, setCurrentGame] = useState<Game>(emptyGame);
 
     useEffect(() => {
