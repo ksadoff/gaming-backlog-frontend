@@ -4,8 +4,15 @@ import * as libraryApi from "../../../api/libraryApi";
 
 const getLibraryWithGamesStub = jest.spyOn(libraryApi, 'getLibraryWithGames');
 const renameLibraryStub = jest.spyOn(libraryApi, 'renameLibrary');
+const deleteLibraryStub = jest.spyOn(libraryApi, 'deleteLibrary');
 jest.spyOn(window, 'alert').mockImplementation(() => {});
 
+const mockedUsedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+   useNavigate: () => mockedUsedNavigate,
+ }));
 describe('Rendering LibraryPage', () => {
   const setup = async () => {
     await act(async () => {
@@ -66,6 +73,14 @@ describe('Rendering LibraryPage', () => {
     });
   });
 
+  it('renders delete button', async () => {
+    await act(async () => {
+      await waitFor(() => {
+        expect(screen.getByTestId('delete')).toBeInTheDocument();
+      });
+    });
+  });
+
   describe('when we click the edit button', () => {
     beforeEach(async () => {
       await act(async () => {
@@ -118,6 +133,22 @@ describe('Rendering LibraryPage', () => {
           expect(screen.getByText('Want to Play')).toBeInTheDocument();
         });
       });
+    });
+  });
+
+  describe('when we click the delete button', () => {
+    beforeEach(async () => {
+      await act(async () => {
+        fireEvent.click(screen.getByTestId('delete'));
+      });
+    });
+
+    it('the deleteLibraryStub is called',  () => {
+      expect(deleteLibraryStub).toHaveBeenCalledWith("123")
+    });
+
+    it('redirects the user back to the libraries page', () => {
+      expect(mockedUsedNavigate).toHaveBeenCalledWith("/libraries/");
     });
   });
 });

@@ -5,6 +5,7 @@ import LibraryRequest from '../../../interfaces/LibraryRequest';
 
 const getLibrariesStub = jest.spyOn(libraryApi, 'getAllLibrariesWithGames');
 const createLibraryStub = jest.spyOn(libraryApi, 'createLibrary');
+const deleteLibraryStub = jest.spyOn(libraryApi, 'deleteLibrary');
 
 const setup = async () => {
   getLibrariesStub.mockResolvedValue([{id: "123",
@@ -71,12 +72,12 @@ describe('Rendering LibrariesPage', () => {
     expect(title).toBeInTheDocument();
   });
 
-  it('renders data', async () => {
+  it('renders data', () => {
       const game1 = screen.getByText(/Disco Elysium/i);
       expect(game1).toBeInTheDocument();
       const game2 = screen.getByText(/Kirby and the Forgotten Land/i);
       expect(game2).toBeInTheDocument();
-    });
+  });
 
   it('renders create new library button', () => {
     expect(screen.getByText("Create Library"));
@@ -88,6 +89,10 @@ describe('Rendering LibrariesPage', () => {
 
   it('renders search input', () => {
     expect(screen.getByTestId("search"));
+  });
+
+  it('renders delete buttons', () => {
+    expect(screen.getAllByTestId("delete")).toHaveLength(2);
   });
 
   describe('when you click on the sort button', () => {
@@ -174,6 +179,22 @@ describe('Rendering LibrariesPage', () => {
       };
         expect(createLibraryStub).toHaveBeenCalledWith(libraryToCreate);
       });
+    });
+  });
+
+  describe('when you click on the delete button for a library', () => {
+    beforeEach(async () => {
+      await act(async () => {
+        fireEvent.click(screen.getAllByTestId("delete")[0]);
+      });
+    });
+
+    it('calls the deleteLibrary stub', () => {
+      expect(deleteLibraryStub).toHaveBeenCalledWith("123");
+    });
+
+    it('calls the getLibraryStub to update the libraries', () => {
+      expect(getLibrariesStub).toHaveBeenCalled();
     });
   });
 });

@@ -3,7 +3,9 @@ import FilterMenu from "../components/FilterMenu";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import GamePreview from "../interfaces/GamePreview";
 import * as libraryApi from "../api/libraryApi";
-import { MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { librariesBaseUrl } from '../constants/Routes';
+import { useNavigate } from 'react-router-dom';
 
 interface LibraryPageProps {
     libraryId: string;
@@ -11,6 +13,8 @@ interface LibraryPageProps {
 
 /*The page representing a specific library (e.g. Completed Games) */
 export default function LibraryPage({ libraryId }: LibraryPageProps) {
+    const navigate = useNavigate();
+
     const [currentLibrary, setCurrentLibrary] = useState<LibraryPreview>();
     const [currentGames, setCurrentGames] = useState<Array<GamePreview>>([]);
     const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -20,6 +24,16 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
         const updatedLibrary = await libraryApi.renameLibrary(libraryName, libraryId);
         setCurrentLibrary(updatedLibrary);
         setIsEditing(false);
+    }
+
+    const redirectToUserDefaultLibrary = () => {
+        // TODO: This will redirect to the user's specific libraries page after GB-60
+        navigate('/' + librariesBaseUrl)
+    }
+
+    const onDeleteLibrary = async (id: string) => {
+        await libraryApi.deleteLibrary(id);
+        redirectToUserDefaultLibrary();
     }
 
     useEffect(() => {
@@ -44,6 +58,9 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
                     {currentLibrary?.name}
                     <button data-testid="edit" onClick={() => setIsEditing(true)}>
                         <MdEdit style={{marginLeft: 10}}/>
+                    </button>
+                    <button data-testid="delete" onClick={() => onDeleteLibrary(libraryId)}>
+                        <MdDelete/>
                     </button>
                 </h1>
             ) : (

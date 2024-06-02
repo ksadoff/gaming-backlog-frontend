@@ -70,3 +70,11 @@ export function renameLibrary(name: string, libraryId: string): Promise<Library>
     .then((response) => response.json())
     .catch(err => console.log(err));
 }
+
+export function deleteLibrary(id: string): Promise<string | void> {
+    return fetch(homeUrl + librariesBaseUrl + `${id}`, {
+        method: "DELETE"
+    })
+    .then((response) => response.statusText)
+    .catch(err => console.log(err));
+}
