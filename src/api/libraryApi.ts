@@ -59,3 +59,14 @@ export function addToLibrary(gameId: string, libraryId: string): Promise<string 
         .catch(err => console.log(err));
 }
 
+export function renameLibrary(name: string, libraryId: string): Promise<Library> {
+    return fetch(homeUrl + librariesBaseUrl + `${libraryId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+            "name": name
+        }),
+        headers: new Headers({'content-type': 'application/json'})
+    })
+    .then((response) => response.json())
+    .catch(err => console.log(err));
+}
