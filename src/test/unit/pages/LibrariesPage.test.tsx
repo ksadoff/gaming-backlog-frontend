@@ -90,6 +90,11 @@ describe('Rendering LibrariesPage', () => {
     expect(screen.getByTestId("search"));
   });
 
+  it('renders profile button', () => {
+    expect(screen.getByRole('button', { name: "Profile" }));
+    expect(screen.getByTestId('profile')).toHaveAttribute('href', "/users/64fcee6c18bc4d16a9f2051e")
+  });
+
   describe('when you click on the sort button', () => {
     beforeEach(() => {
       fireEvent.click(screen.getByText(/Sort Ascending/i
