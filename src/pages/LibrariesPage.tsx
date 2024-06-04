@@ -85,6 +85,9 @@ function sortLibraries() {
         <>
             <h1>
                 Libraries 
+                <a data-testid="profile" href="/users/64fcee6c18bc4d16a9f2051e" style={{marginLeft: "10px"}}> 
+                    <button>Profile</button>
+                </a>
             </h1>
             <div>
                 <button onClick={sortLibraries}>Sort {sortAscending ? "Ascending" : "Descending"}</button>
