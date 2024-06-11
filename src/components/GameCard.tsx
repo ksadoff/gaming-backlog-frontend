@@ -32,7 +32,7 @@ interface LibraryOption {
 
 export function GameCard(gameCardProps : GameCardProps ) {
     const [libraryOptions, setAllLibraryOptions] = useState<Array<LibraryOption>>([])
-    const [selectedLibrary, setSelectedLibrary] = useState("")
+    const [selectedLibraries, setSelectedLibraries] = useState<Array<string>>([])
 
     const fetchAllLibraries = async () => {
         const libraries = await libraryApi.getAllLibrariesWithGames()
@@ -43,13 +43,14 @@ export function GameCard(gameCardProps : GameCardProps ) {
         setAllLibraryOptions(libraryOptions)
     }
 
-    const addToLibrary = async (gameId: string, libraryId: string) => {
-        if (libraryId === "") {
-            alert("No library selected!")
+    const addToLibrary = async (gameId: string, libraryIds: Array<string>) => {
+        if (libraryIds.length === 0) {
+            alert("No libraries selected!")
             return
         }
+        console.log(libraryIds)
         // todo: need to check if it's an instance or game
-        await libraryApi.addToLibrary(gameId, libraryId)
+        await libraryApi.addToLibrary(gameId, libraryIds)
     };
 
     return (
@@ -102,11 +103,12 @@ export function GameCard(gameCardProps : GameCardProps ) {
             <div>
                 <Select
                     placeholder="Select a Library"
+                    isMulti
                     options={libraryOptions}
                     onMenuOpen={() => fetchAllLibraries()}
-                    onChange={(library) => setSelectedLibrary(library!.value)}
+                    onChange={(libraries) => setSelectedLibraries(libraries.map(library => library.value))}
                 />
-                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}/>
+                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibraries)}/>
             </div>
         </div>
     )

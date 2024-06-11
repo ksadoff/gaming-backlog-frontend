@@ -47,11 +47,12 @@ export function createLibrary(library: LibraryRequest): Promise<Library> {
     .catch(err => console.log(err));
 }
 
-export function addToLibrary(gameId: string, libraryId: string): Promise<string | void> {
-    return fetch(homeUrl + librariesBaseUrl  + `${libraryId}/games`, {
+export function addToLibrary(gameId: string, libraryIds: Array<string>): Promise<string | void> {
+    return fetch(homeUrl + librariesBaseUrl  + `games`, {
         method: "POST",
         body: JSON.stringify({
-            "gameId": gameId
+            "gameId": gameId,
+            "libraryIds": libraryIds
         }),
         headers: new Headers({'content-type': 'application/json'})
     })
