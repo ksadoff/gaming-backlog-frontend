@@ -85,6 +85,7 @@ export default function LibrariesPage() {
 
     const onDeleteLibrary = async (id: string) => {
         await libraryApi.deleteLibrary(id);
+        alert(`Library ${id} deleted`)
         fetchLibraries();
     }
 

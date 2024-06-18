@@ -6,6 +6,7 @@ import LibraryRequest from '../../../interfaces/LibraryRequest';
 const getLibrariesStub = jest.spyOn(libraryApi, 'getAllLibrariesWithGames');
 const createLibraryStub = jest.spyOn(libraryApi, 'createLibrary');
 const deleteLibraryStub = jest.spyOn(libraryApi, 'deleteLibrary');
+jest.spyOn(window, 'alert').mockImplementation(() => {});
 
 const setup = async () => {
   getLibrariesStub.mockResolvedValue([{id: "123",
