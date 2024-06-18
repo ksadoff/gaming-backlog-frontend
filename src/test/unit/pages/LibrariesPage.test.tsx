@@ -93,6 +93,10 @@ describe('Rendering LibrariesPage', () => {
 
   it('renders delete buttons', () => {
     expect(screen.getAllByTestId("delete")).toHaveLength(2);
+  
+    it('renders profile button', () => {
+    expect(screen.getByRole('button', { name: "Profile" }));
+    expect(screen.getByTestId('profile')).toHaveAttribute('href', "/users/64fcee6c18bc4d16a9f2051e")
   });
 
   describe('when you click on the sort button', () => {
