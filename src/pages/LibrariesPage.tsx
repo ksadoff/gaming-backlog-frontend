@@ -7,6 +7,7 @@ import GamePreview from "../interfaces/GamePreview";
 import { homeUiUrl } from "../constants/Routes";
 import CreateLibraryModal from "../components/CreateLibraryModal";
 import LibraryRequest from '../interfaces/LibraryRequest';
+import { MdDelete } from "react-icons/md";
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
@@ -46,15 +47,16 @@ export default function LibrariesPage() {
         games.forEach(game => gamePreviews.push({ id: game.id, name: game.name}));
         return gamePreviews;
     }
+    
+    const fetchLibraries = async () => {
+        const libraries = await libraryApi.getAllLibrariesWithGames();
+        const libraryPreviews = new Array<LibraryPreview>;
+        libraries.forEach(library => libraryPreviews.push({ id: library.id, name: library.name, games: gamesToPreviews(library.games) }))
+        setUserLibraries(libraryPreviews);
+        setFilteredLibraries(libraryPreviews);
+    }
 
     useEffect(() => {
-        const fetchLibraries = async () => {
-            const libraries = await libraryApi.getAllLibrariesWithGames();
-            const libraryPreviews = new Array<LibraryPreview>;
-            libraries.forEach(library => libraryPreviews.push({ id: library.id, name: library.name, games: gamesToPreviews(library.games) }))
-            setUserLibraries(libraryPreviews);
-            setFilteredLibraries(libraryPreviews);
-        }
         fetchLibraries();
     }, [])
 
@@ -69,17 +71,23 @@ export default function LibrariesPage() {
         return list;
     }
 
-function sortLibraries() {
-    const sortedLibraries = [...filteredLibraries].sort((a, b) => {
-        if (sortAscending) {
-            setSortAscending(false);
-            return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        }
-        setSortAscending(true);
-        return a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
-    })
-    setFilteredLibraries(sortedLibraries);
-}
+    function sortLibraries() {
+        const sortedLibraries = [...filteredLibraries].sort((a, b) => {
+            if (sortAscending) {
+                setSortAscending(false);
+                return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+            }
+            setSortAscending(true);
+            return a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+        })
+        setFilteredLibraries(sortedLibraries);
+    }
+
+    const onDeleteLibrary = async (id: string) => {
+        await libraryApi.deleteLibrary(id);
+        alert(`Library ${id} deleted`)
+        fetchLibraries();
+    }
 
     return(
         <>
@@ -100,6 +108,9 @@ function sortLibraries() {
                     return <div key={preview.id}>
                         <h1 style={{zIndex: 10}}>
                             <a href={`${homeUiUrl}`+"libraries/"+preview.id}>{preview.name}</a>
+                            <button data-testid="delete" onClick={() => onDeleteLibrary(preview.id)}>
+                                <MdDelete/>
+                            </button>
                         </h1>
                             {/* For now we'll render the first 5 games in each library */}
                             {/* TODO: game icon should link to game page? We'll need to include icon in the game response from the backend */}
