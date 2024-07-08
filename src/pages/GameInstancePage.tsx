@@ -6,6 +6,8 @@ import { GameCard } from "../components/GameCard";
 import React, { useEffect, useState } from "react";
 import GameInstance from "../interfaces/GameInstance";
 import * as gameApi from "../api/gameApi";
+import CustomFields from "../components/CustomFields";
+import {Platforms} from "../constants/Platforms";
 
 interface GameId {
     gameId: string
@@ -90,6 +92,7 @@ export default function GameInstancePage({gameId}: GameId) {
 
     return (
     // We'll want a page header at some point
+    <>
     <GameCard
         gameId={gameId}
         gameName = {getName()}
@@ -109,5 +112,7 @@ export default function GameInstancePage({gameId}: GameId) {
         platformsOwnedOn = {getPlatformsOwnedOn()}
         dateAdded ={getDateAdded()}
     />
+        <CustomFields id={gameId}/>
+        </>
     )
 }

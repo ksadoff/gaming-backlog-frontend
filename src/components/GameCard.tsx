@@ -98,7 +98,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
                     return <p key={platform}>{platform}</p>
                 }))}
             </div>
-            <p>{gameCardProps?.dateAdded?.toDateString()}</p>
+            <p>{gameCardProps?.dateAdded?.toString()}</p>
             <div>
                 <Select
                     placeholder="Select a Library"

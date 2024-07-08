@@ -1,10 +1,10 @@
-export enum platforms {
+export enum Platforms {
     // Nintendo
     NintendoSwitch = "Nintendo Switch",
     NewNintendo3DS = "New Nintendo 3DS",
     Wii = "Wii",
     WiiU = "Wii U",
-    Nintendo3DS = "Nintendo3DS",
+    Nintendo3DS = "Nintendo 3DS",
     NintendoDSi = "Nintendo DSi",
     NintendoDS = "Nintendo DS",
     GameBoyAdvance = "Game Boy Advance",
