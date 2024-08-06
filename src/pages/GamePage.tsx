@@ -2,6 +2,7 @@ import { GameCard } from "../components/GameCard";
 import React, { useEffect, useState } from "react";
 import Game from "../interfaces/Game";
 import * as gameApi from "../api/gameApi";
+import TopNav from "../components/TopNav";
 
 interface GamePageProps {
     gameId: string;
@@ -55,16 +56,19 @@ export default function GamePage({ gameId }: GamePageProps) {
 
     return (
     // We'll want a page header at some point
-    <GameCard
-        gameId={gameId}
-        gameName= {getName()}
-        gameImage={getImage()}
-        gameSummary={getSummary()}
-        gamePlatforms = {getPlatforms()}
-        gameGenres = {getGenres()}
-        gameFranchises= {getFranchises()}
-        gameCompanies = {getCompanies()}
-        gameReleaseDate = {getReleaseDate()}
-    />
+    <>
+    <TopNav/>
+        <GameCard
+            gameId={gameId}
+            gameName= {getName()}
+            gameImage={getImage()}
+            gameSummary={getSummary()}
+            gamePlatforms = {getPlatforms()}
+            gameGenres = {getGenres()}
+            gameFranchises= {getFranchises()}
+            gameCompanies = {getCompanies()}
+            gameReleaseDate = {getReleaseDate()}
+        />
+    </>
     )
 }

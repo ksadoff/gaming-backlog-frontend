@@ -6,6 +6,7 @@ import * as libraryApi from "../api/libraryApi";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { librariesBaseUrl } from '../constants/Routes';
 import { useNavigate } from 'react-router-dom';
+import TopNav from "../components/TopNav";
 
 interface LibraryPageProps {
     libraryId: string;
@@ -52,39 +53,42 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
     }, [currentLibrary]);
 
     return(
-        <div>
-            {!isEditing ? (
-                <h1>
-                    {currentLibrary?.name}
-                    <button data-testid="edit" onClick={() => setIsEditing(true)}>
-                        <MdEdit style={{marginLeft: 10}}/>
-                    </button>
-                    <button data-testid="delete" onClick={() => onDeleteLibrary(libraryId)}>
-                        <MdDelete/>
-                    </button>
-                </h1>
-            ) : (
-                <div>
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        onSubmitLibraryName()
-                      }
-                    }>
-                        <input data-testid="libraryName" type="text" onChange={(e) => setLibraryName(e.target.value)}/>
-                    </form>
-                    <button onClick={() => setIsEditing(false)}>cancel</button>
-                    <button onClick={onSubmitLibraryName}>submit</button>
-                </div>
-            )
-        }
-            <FilterMenu/>
+        <>
+            <TopNav/>
             <div>
-                {(currentGames.map((game) => {
-                    // TODO: Add routing to link to game page
-                    return  <p key={game.name}>{game.name}</p>;
-                    })
-                )}
+                {!isEditing ? (
+                    <h1>
+                        {currentLibrary?.name}
+                        <button data-testid="edit" onClick={() => setIsEditing(true)}>
+                            <MdEdit style={{marginLeft: 10}}/>
+                        </button>
+                        <button data-testid="delete" onClick={() => onDeleteLibrary(libraryId)}>
+                            <MdDelete/>
+                        </button>
+                    </h1>
+                ) : (
+                    <div>
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            onSubmitLibraryName()
+                        }
+                        }>
+                            <input data-testid="libraryName" type="text" onChange={(e) => setLibraryName(e.target.value)}/>
+                        </form>
+                        <button onClick={() => setIsEditing(false)}>cancel</button>
+                        <button onClick={onSubmitLibraryName}>submit</button>
+                    </div>
+                )
+            }
+                <FilterMenu/>
+                <div>
+                    {(currentGames.map((game) => {
+                        // TODO: Add routing to link to game page
+                        return  <p key={game.name}>{game.name}</p>;
+                        })
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 }

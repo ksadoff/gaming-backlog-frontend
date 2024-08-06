@@ -32,6 +32,17 @@ export function authenticateUser(user: UserRequest): Promise<UserResponse | unde
     .catch(err => console.log(err));
 }
 
+export function logout(username: string): Promise<string> {
+    return fetch(homeUrl + usersBaseUrl + `logout`, {
+        method: "POST",
+        body: JSON.stringify(username),
+        headers: new Headers({'content-type': 'application/json'})
+    })
+    .then((response) => response.json())
+    .catch(err => console.log(err));
+}
+
+
 export function updateUser(id: string, user: UserRequest): Promise<UserResponse | undefined> {
     return fetch(homeUrl + usersBaseUrl + `${id}`, {
         method: "PATCH",
