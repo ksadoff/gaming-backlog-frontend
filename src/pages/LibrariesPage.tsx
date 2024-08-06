@@ -8,6 +8,7 @@ import { homeUiUrl } from "../constants/Routes";
 import CreateLibraryModal from "../components/CreateLibraryModal";
 import LibraryRequest from '../interfaces/LibraryRequest';
 import { MdDelete } from "react-icons/md";
+import TopNav from "../components/TopNav";
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
@@ -91,6 +92,7 @@ export default function LibrariesPage() {
 
     return(
         <>
+        <TopNav/>
             <h1>
                 Libraries 
                 <a data-testid="profile" href="/users/64fcee6c18bc4d16a9f2051e" style={{marginLeft: "10px"}}> 
