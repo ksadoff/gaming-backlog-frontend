@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 
 import * as userApi from "../api/userApi";
 import UserRequest from "../interfaces/UserRequest";
+import TopNav from '../components/TopNav';
 
 interface UserProfile {
   displayName: string;
@@ -64,6 +65,7 @@ export default function UserProfilePage({id}: UserId) {
 
   return (
     <div>
+      <TopNav/>
       <h1>User Profile</h1>
       <div>
         <p>

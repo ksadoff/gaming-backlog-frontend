@@ -8,6 +8,7 @@ import GameInstance from "../interfaces/GameInstance";
 import * as gameApi from "../api/gameApi";
 import CustomFields from "../components/CustomFields";
 import {Platforms} from "../constants/Platforms";
+import TopNav from "../components/TopNav";
 
 interface GameId {
     gameId: string
@@ -93,6 +94,7 @@ export default function GameInstancePage({gameId}: GameId) {
     return (
     // We'll want a page header at some point
     <>
+    <TopNav/>
     <GameCard
         gameId={gameId}
         gameName = {getName()}
