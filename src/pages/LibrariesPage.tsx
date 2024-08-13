@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as libraryApi from "../api/libraryApi";
 import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
@@ -9,6 +9,7 @@ import CreateLibraryModal from "../components/CreateLibraryModal";
 import LibraryRequest from '../interfaces/LibraryRequest';
 import { MdDelete } from "react-icons/md";
 import TopNav from "../components/TopNav";
+import SearchBar from "../components/SearchBar";
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
@@ -92,6 +93,7 @@ export default function LibrariesPage() {
 
     return(
         <>
+        <SearchBar/>
         <TopNav/>
             <h1>
                 Libraries 
