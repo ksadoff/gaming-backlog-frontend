@@ -96,9 +96,6 @@ describe('Rendering Custom Fields', () => {
         fireEvent.change(notesTextArea, { target: { value: 'On Steam' } });
         expect(notesTextArea).toHaveValue('On Steam');
 
-        // const selectDropdown =  screen.getByText(/Select Platforms/)
-        // await selectEvent.select(selectDropdown, ["Nintendo Switch", "PC"])
-
         const selectInput = screen.getByLabelText(/Select All Platforms Owned On:/i).parentElement?.querySelector('input');
         expect(selectInput).toBeInTheDocument();
 
