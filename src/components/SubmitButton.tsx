@@ -5,10 +5,10 @@ interface ButtonInfo {
     onClick: () => void
 }
 
-const OpenLibraryModalButton = (props: ButtonInfo) => {
+const SubmitButton = (props: ButtonInfo) => {
     return (
     <button
-        className= "add-to-library-button"
+        className= "submit-button"
         onClick={props.onClick}
     >
     {props.text}
@@ -16,4 +16,4 @@ const OpenLibraryModalButton = (props: ButtonInfo) => {
 )
 }
 
-export default OpenLibraryModalButton;
+export default SubmitButton;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import OpenLibraryModalButton from "./OpenLibraryModalButton";
+import SubmitButton from "./SubmitButton";
 
 const SearchBar = () => {
     const [value, setValue] = useState('');
@@ -21,7 +21,7 @@ const SearchBar = () => {
                     setValue(e.target.value);
                 }}
             />
-            <OpenLibraryModalButton text="Submit Search" onClick={() => sendSearchQuery(value)}/>
+            <SubmitButton text="Submit Search" onClick={() => sendSearchQuery(value)}/>
         </div>
     );
 

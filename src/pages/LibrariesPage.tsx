@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as libraryApi from "../api/libraryApi";
-import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
+import SubmitButton from "../components/SubmitButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import GameInstance from "../interfaces/GameInstance";
 import GamePreview from "../interfaces/GamePreview";
@@ -123,7 +123,7 @@ export default function LibrariesPage() {
                     })
                 )}
             </div>
-            <OpenLibraryModalButton text="Create Library" onClick={() => setIsLibraryModalOpen(true)}/>
+            <SubmitButton text="Create Library" onClick={() => setIsLibraryModalOpen(true)}/>
             <CreateLibraryModal isOpen={isLibraryModalOpen} onClose={() => setIsLibraryModalOpen(false)} onSubmit={onCreateNewLibrary}/>
             </>
     )
