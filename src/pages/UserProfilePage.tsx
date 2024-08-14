@@ -1,8 +1,9 @@
-import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 
 import * as userApi from "../api/userApi";
 import UserRequest from "../interfaces/UserRequest";
 import TopNav from '../components/TopNav';
+import SearchBar from "../components/SearchBar";
 
 interface UserProfile {
   displayName: string;
@@ -65,6 +66,7 @@ export default function UserProfilePage({id}: UserId) {
 
   return (
     <div>
+      <SearchBar/>
       <TopNav/>
       <h1>User Profile</h1>
       <div>

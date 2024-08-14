@@ -2,7 +2,7 @@ import { useState} from "react";
 import Select from 'react-select'
 
 // components
-import OpenLibraryModalButton from "./OpenLibraryModalButton";
+import SubmitButton from "./SubmitButton";
 import * as libraryApi from "../api/libraryApi";
 
 interface GameCardProps {
@@ -106,7 +106,7 @@ export function GameCard(gameCardProps : GameCardProps ) {
                     onMenuOpen={() => fetchAllLibraries()}
                     onChange={(library) => setSelectedLibrary(library!.value)}
                 />
-                <OpenLibraryModalButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}/>
+                <SubmitButton text="Add to Library" onClick={() => addToLibrary(gameCardProps.gameId, selectedLibrary)}/>
             </div>
         </div>
     )
