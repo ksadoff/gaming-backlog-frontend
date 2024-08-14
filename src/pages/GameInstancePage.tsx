@@ -6,6 +6,7 @@ import { GameCard } from "../components/GameCard";
 import React, { useEffect, useState } from "react";
 import GameInstance from "../interfaces/GameInstance";
 import * as gameApi from "../api/gameApi";
+import CustomFields from "../components/CustomFields";
 import TopNav from "../components/TopNav";
 import SearchBar from "../components/SearchBar";
 
@@ -93,27 +94,28 @@ export default function GameInstancePage({gameId}: GameId) {
     return (
     // We'll want a page header at some point
     <>
-        <SearchBar/>
-        <TopNav/>
-        <GameCard
-            gameId={gameId}
-            gameName = {getName()}
-            gameImage = {getImage()}
-            gameSummary = {getSummary()}
-            gamePlatforms = {getPlatforms()}
-            gameGenres = {getGenres()}
-            gameFranchises = {getFranchises()}
-            gameCompanies = {getCompanies()}
-            gameReleaseDate = {getReleaseDate()}
-            gameRating = {getGameRating()}
-            gameReview = {getGameReview()}
-            gameRanking = {getGameRanking()}
-            yearPlayed = {getYearPlayed()}
-            yearReceived = {getYearReceived()}
-            notes = {getNotes()}
-            platformsOwnedOn = {getPlatformsOwnedOn()}
-            dateAdded ={getDateAdded()}
-        />
-    </>
+    <SearchBar/>    
+    <TopNav/>
+    <GameCard
+        gameId={gameId}
+        gameName = {getName()}
+        gameImage = {getImage()}
+        gameSummary = {getSummary()}
+        gamePlatforms = {getPlatforms()}
+        gameGenres = {getGenres()}
+        gameFranchises = {getFranchises()}
+        gameCompanies = {getCompanies()}
+        gameReleaseDate = {getReleaseDate()}
+        gameRating = {getGameRating()}
+        gameReview = {getGameReview()}
+        gameRanking = {getGameRanking()}
+        yearPlayed = {getYearPlayed()}
+        yearReceived = {getYearReceived()}
+        notes = {getNotes()}
+        platformsOwnedOn = {getPlatformsOwnedOn()}
+        dateAdded ={getDateAdded()}
+    />
+        <CustomFields id={gameId}/>
+        </>
     )
 }
