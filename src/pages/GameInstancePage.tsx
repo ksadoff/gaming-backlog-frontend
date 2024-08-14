@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import GameInstance from "../interfaces/GameInstance";
 import * as gameApi from "../api/gameApi";
 import TopNav from "../components/TopNav";
+import SearchBar from "../components/SearchBar";
 
 interface GameId {
     gameId: string
@@ -92,6 +93,7 @@ export default function GameInstancePage({gameId}: GameId) {
     return (
     // We'll want a page header at some point
     <>
+        <SearchBar/>
         <TopNav/>
         <GameCard
             gameId={gameId}

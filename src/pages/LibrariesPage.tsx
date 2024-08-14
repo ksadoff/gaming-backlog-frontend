@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as libraryApi from "../api/libraryApi";
-import OpenLibraryModalButton from "../components/OpenLibraryModalButton";
+import SubmitButton from "../components/SubmitButton";
 import LibraryPreview from "../interfaces/LibraryPreview";
 import GameInstance from "../interfaces/GameInstance";
 import GamePreview from "../interfaces/GamePreview";
@@ -9,6 +9,7 @@ import CreateLibraryModal from "../components/CreateLibraryModal";
 import LibraryRequest from '../interfaces/LibraryRequest';
 import { MdDelete } from "react-icons/md";
 import TopNav from "../components/TopNav";
+import SearchBar from "../components/SearchBar";
 
 /*The page representing all of a user's libraries*/
 export default function LibrariesPage() {
@@ -92,6 +93,7 @@ export default function LibrariesPage() {
 
     return(
         <>
+        <SearchBar/>
         <TopNav/>
             <h1>
                 Libraries 
@@ -121,7 +123,7 @@ export default function LibrariesPage() {
                     })
                 )}
             </div>
-            <OpenLibraryModalButton text="Create Library" onClick={() => setIsLibraryModalOpen(true)}/>
+            <SubmitButton text="Create Library" onClick={() => setIsLibraryModalOpen(true)}/>
             <CreateLibraryModal isOpen={isLibraryModalOpen} onClose={() => setIsLibraryModalOpen(false)} onSubmit={onCreateNewLibrary}/>
             </>
     )
