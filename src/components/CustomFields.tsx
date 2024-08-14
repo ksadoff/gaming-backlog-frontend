@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import OpenLibraryModalButton from "./OpenLibraryModalButton";
+import SubmitButton from "./SubmitButton";
 import GameInstanceRequest from "../interfaces/GameInstanceRequest";
 import Select from "react-select";
 import {Platforms} from "../constants/Platforms";
@@ -122,7 +122,7 @@ const CustomFields = ({id}: GameProps) => {
             </label>
             <br />
             <br />
-            <OpenLibraryModalButton text={"Submit Custom Fields"} onClick={() => updateFields()}/>
+            <SubmitButton text={"Submit Custom Fields"} onClick={() => updateFields()}/>
         </>
     )
 }

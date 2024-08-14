@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import GameInstance from "../interfaces/GameInstance";
 import * as gameApi from "../api/gameApi";
 import CustomFields from "../components/CustomFields";
-import {Platforms} from "../constants/Platforms";
 import TopNav from "../components/TopNav";
 import SearchBar from "../components/SearchBar";
 
