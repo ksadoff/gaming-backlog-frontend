@@ -1,3 +1,4 @@
+import SearchBar from "./SearchBar";
 import * as userApi from "../api/userApi";
 import { useNavigate } from 'react-router-dom';
 
@@ -17,6 +18,13 @@ export default function TopNav() {
     }
 
     return (
-        <button onClick={logout}>Log out</button>
+        <>
+            <div style={{width: "100%", display: "flex"}}>
+                <SearchBar/>
+                {/* Slight hack to get even spacing */}
+                <div style={{flexGrow: 1}}/>
+                <button onClick={logout}>Log out</button>
+            </div>
+        </>    
     )
 }

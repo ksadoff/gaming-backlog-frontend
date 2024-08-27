@@ -93,7 +93,6 @@ export default function LibrariesPage() {
 
     return(
         <>
-        <SearchBar/>
         <TopNav/>
             <h1>
                 Libraries 

@@ -55,7 +55,6 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
 
     return(
         <>
-            <SearchBar/>
             <TopNav/>
             <div>
                 {!isEditing ? (

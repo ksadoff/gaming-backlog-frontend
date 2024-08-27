@@ -56,9 +56,7 @@ export default function GamePage({ gameId }: GamePageProps) {
     }
 
     return (
-    // We'll want a page header at some point
     <>
-    <SearchBar/>
     <TopNav/>
         <GameCard
             gameId={gameId}

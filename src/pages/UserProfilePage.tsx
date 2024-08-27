@@ -66,7 +66,6 @@ export default function UserProfilePage({id}: UserId) {
 
   return (
     <div>
-      <SearchBar/>
       <TopNav/>
       <h1>User Profile</h1>
       <div>
