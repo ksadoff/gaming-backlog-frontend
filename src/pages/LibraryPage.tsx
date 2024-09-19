@@ -7,7 +7,6 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { librariesBaseUrl } from '../constants/Routes';
 import { useNavigate } from 'react-router-dom';
 import TopNav from "../components/TopNav";
-import SearchBar from "../components/SearchBar";
 
 interface LibraryPageProps {
     libraryId: string;
@@ -55,7 +54,6 @@ export default function LibraryPage({ libraryId }: LibraryPageProps) {
 
     return(
         <>
-            <SearchBar/>
             <TopNav/>
             <div>
                 {!isEditing ? (
