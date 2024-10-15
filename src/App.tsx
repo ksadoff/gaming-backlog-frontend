@@ -6,6 +6,7 @@ import GameInstancePage from "./pages/GameInstancePage";
 import UserProfilePage from './pages/UserProfilePage';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
+import SearchResultsPage from './pages/SearchResultsPage';
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/users/:id" element={<UserProfilePageWrapper/>}></Route>
             <Route  path="/register" element={<RegistrationPage/>}></Route>
             <Route  path="/login" element={<LoginPage/>}></Route>
+            <Route  path="/search" element={<SearchResultsPage/>}></Route>
           </Routes>
        </BrowserRouter>)
 }

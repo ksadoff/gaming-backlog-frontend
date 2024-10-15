@@ -8,7 +8,7 @@ const SearchBar = () => {
     // TODO: implement actual search functionality
     const sendSearchQuery = (query: string) => {
         setValue(query)
-        gameApi.searchGamesBySubstring(query);
+        gameApi.getGameByName(query);
     }
 
     return (
