@@ -16,10 +16,10 @@ jest.mock('../../../api/userApi');
 const mockedUserApi = userApi as jest.Mocked<typeof userApi>;
 
 describe('TopNav Component', () => {
-  it('renders logout button', () => {
+  it('renders buttons', () => {
     const { getByRole } = render(<TopNav />);
-    
     expect(getByRole('button', { name: 'Log out' })).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Profile' })).toBeInTheDocument();
   });
 
   it('submits logout request successfully', async () => {
@@ -39,4 +39,18 @@ describe('TopNav Component', () => {
         expect(mockedNavigate).toHaveBeenCalledWith('/login');
     });
   });
+
+  it('navigates to profile page', async () => {
+    const mockedNavigate = jest.fn();
+    mockedUseNavigate.mockReturnValue(mockedNavigate);
+
+    const { getByRole } = render(<TopNav />);
+    act(() => {
+      fireEvent.click(getByRole('button', { name: 'Profile' }));
+    });
+
+    await waitFor(() => {
+        expect(mockedNavigate).toHaveBeenCalledWith('/users/id');
+    });
+  })
 });

@@ -1,9 +1,8 @@
-import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
+import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 
 import * as userApi from "../api/userApi";
 import UserRequest from "../interfaces/UserRequest";
 import TopNav from '../components/TopNav';
-import SearchBar from "../components/SearchBar";
 
 interface UserProfile {
   displayName: string;

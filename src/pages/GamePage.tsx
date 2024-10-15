@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Game from "../interfaces/Game";
 import * as gameApi from "../api/gameApi";
 import TopNav from "../components/TopNav";
-import SearchBar from "../components/SearchBar";
 
 interface GamePageProps {
     gameId: string;
