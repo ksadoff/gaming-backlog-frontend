@@ -3,7 +3,7 @@
 // we will have it separate. This will be in place once we add the necessary logic for users
 
 import { GameCard } from "../components/GameCard";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import GameInstance from "../interfaces/GameInstance";
 import * as gameApi from "../api/gameApi";
 import CustomFields from "../components/CustomFields";
@@ -91,7 +91,6 @@ export default function GameInstancePage({gameId}: GameId) {
     }
 
     return (
-    // We'll want a page header at some point
     <>
     <TopNav/>
     <GameCard
@@ -114,6 +113,6 @@ export default function GameInstancePage({gameId}: GameId) {
         dateAdded ={getDateAdded()}
     />
         <CustomFields id={gameId}/>
-        </>
+    </>
     )
 }

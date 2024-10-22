@@ -1,5 +1,3 @@
-import React from "react"
-
 interface ButtonInfo {
     text: string,
     onClick: () => void
